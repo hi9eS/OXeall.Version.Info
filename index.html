@@ -125,8 +125,11 @@
     }
     .modal-box {
       background: var(--panel); border: 1px solid var(--accent-soft);
-      padding: 20px; border-radius: var(--radius);
-      box-shadow: 0 10px 40px #000; max-width: 400px; width: 90%;
+      padding: 26px 26px 20px;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 40px #000;
+      max-width: 460px; width: 90%;
+      line-height: 1.6;
     }
   </style>
 </head>
@@ -200,15 +203,17 @@
 
   <footer>
     <div>Игры созданы OXeall Studios.</div>
-    <div>Version: 1.0.5.0, 25H4</div>
+    <div>Version: 1.0.5.1, 25H4</div>
   </footer>
 
   <div class="modal" id="modal">
     <div class="modal-box">
       <h3>City DayX 2 — SOON</h3>
-      <p>Игра рассчитана на игроков 9+.  
-      Предварительный выпуск: декабрь 2025 года.  
-      Следите за обновлениями.</p>
+      <p style="opacity:0.7; margin-bottom:10px;">Игра рассчитана на игроков 9+.</p>
+      <p style="margin-bottom:8px;">City DayX 2 — экспериментальный проект OXeall Studios, продолжающий серию DayX. Здесь тестируются новые технологии, графика и взаимодействие игроков.</p>
+      <p style="margin-bottom:12px;">В финальной версии появятся улучшенные эффекты, переработанная карта, новые транспортные средства и система экономики.</p>
+      <p><b>Предварительный выпуск:</b> декабрь 2025 года.<br>
+      <span style="opacity:0.8;">Следите за обновлениями на сайте и Roblox.</span></p>
       <button class="btn" onclick="closeBeta()">Закрыть</button>
     </div>
   </div>
