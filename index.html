@@ -94,7 +94,6 @@
     }
     .card:hover .thumb {transform:scale(1.03);}
 
-    /* бейдж теперь всегда поверх */
     .badge {
       position:absolute;top:10px;left:10px;
       font-weight:600;padding:5px 12px;
@@ -103,7 +102,7 @@
       z-index:2;
       transition:.25s;
       user-select:none;
-      pointer-events:none; /* фиксация исчезновения */
+      pointer-events:none;
     }
     .badge.blue {
       color:var(--accent);
@@ -158,6 +157,25 @@
       border-radius:var(--radius);
       box-shadow:0 10px 40px #000;
       max-width:460px;width:90%;line-height:1.6;
+      position:relative;
+    }
+
+    /* крестик */
+    .close-btn {
+      position:absolute;
+      top:10px;right:12px;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+      padding:4px;
+      transition:transform .2s ease;
+    }
+    .close-btn:hover {transform:scale(1.15);}
+    .close-btn svg {
+      width:20px;height:20px;
+      stroke:var(--accent);
+      stroke-width:2;
+      fill:none;
     }
   </style>
 </head>
@@ -200,7 +218,7 @@
         </article>
 
         <article class="card">
-          <span class="badge blue">SOON 2026</span>
+          <span class="badge blue">SOON</span>
           <img class="thumb" src="https://t2.rbxcdn.com/180DAY-cf7ec8785144e39d59caace447f63ba7" alt="City DayX 2">
           <div class="card__body">
             <h3>City DayX 2 (BETA)</h3>
@@ -234,17 +252,22 @@
 
   <footer>
     <div>Игры созданы OXeall Studios. Несанкционированное копирование и публикация могут привести к ограничению доступа.</div>
-    <div>Version: 1.0.5.6, 25H4</div>
+    <div>Version: 1.0.5.6.1, 25H4</div>
   </footer>
 
   <div class="modal" id="modal">
     <div class="modal-box">
+      <button class="close-btn" onclick="closeBeta()">
+        <svg viewBox="0 0 24 24">
+          <line x1="5" y1="5" x2="19" y2="19"/>
+          <line x1="19" y1="5" x2="5" y2="19"/>
+        </svg>
+      </button>
       <h3>City DayX 2 — SOON</h3>
       <p style="opacity:0.7;margin-bottom:10px;">Игра рассчитана на игроков 9+.</p>
       <p style="margin-bottom:8px;">City DayX 2 — экспериментальный проект OXeall Studios, продолжающий серию DayX. Здесь тестируются новые технологии, графика и взаимодействие игроков.</p>
       <p style="margin-bottom:12px;">В финальной версии появятся улучшенные эффекты, переработанная карта, новые транспортные средства и система экономики.</p>
       <p><b>Ожидаемый запуск:</b> 2026 год.<br><span style="opacity:0.8;">Следите за обновлениями на сайте и Roblox.</span></p>
-      <button class="btn" onclick="closeBeta()">Закрыть</button>
     </div>
   </div>
 
