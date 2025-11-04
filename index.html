@@ -27,45 +27,6 @@
       min-height: 100vh;
     }
 
-    /* Welcome Animation */
-    .welcome {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #000;
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-    .welcome.show {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity 1s ease, visibility 1s ease;
-    }
-    .welcome .message {
-      font-size: 36px;
-      font-weight: bold;
-      text-align: center;
-    }
-    .welcome .skip-btn {
-      position: absolute;
-      bottom: 20px;
-      padding: 10px 20px;
-      background: var(--accent);
-      color: #031319;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.25s ease;
-    }
-    .welcome .skip-btn:hover {
-      background: #00c4e0;
-    }
-
     /* HEADER */
     header {
       position: sticky; top: 0; z-index: 10;
@@ -242,12 +203,6 @@
   </style>
 </head>
 <body>
-  <!-- Welcome screen -->
-  <div class="welcome" id="welcomeScreen">
-    <div class="message">Welcome to OXeall Studios Games</div>
-    <button class="skip-btn" onclick="closeWelcome()">Skip</button>
-  </div>
-
   <header>
     <nav>
       <a href="#" class="brand"><div class="dot"></div>OXeall Studios Games</a>
@@ -336,11 +291,6 @@
     const tabs = document.querySelectorAll('.tab');
     const sections = document.querySelectorAll('section');
     const modal = document.getElementById('modal');
-
-    // Welcome screen behavior
-    setTimeout(() => { document.getElementById('welcomeScreen').classList.add('show'); }, 10);
-    setTimeout(() => { document.getElementById('welcomeScreen').style.display = 'none'; }, 5000); // Auto close after 5 seconds
-    function closeWelcome() { document.getElementById('welcomeScreen').style.display = 'none'; }
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
