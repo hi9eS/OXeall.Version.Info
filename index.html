@@ -15,6 +15,8 @@
       --radius: 12px;
       --shadow: 0 8px 24px #00e5ff18;
       --highlight: #f57c00;  /* Новый цвет для улучшенной надписи */
+      --btn-padding: 8px 14px; /* Размеры кнопок */
+      --grid-gap: 24px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -132,6 +134,20 @@
       transform: translateY(-2px);
     }
 
+    /* SOON BADGE */
+    .soon-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(0, 229, 255, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 13px; font-weight: 600;
+      padding: 5px 12px; border-radius: 999px;
+      backdrop-filter: blur(4px);
+      cursor: pointer;
+      transition: .25s;
+    }
+    .soon-badge:hover { background: rgba(0,229,255,0.25); }
+
     /* FOOTER */
     footer {
       border-top: 1px solid #00e5ff11;
@@ -216,6 +232,13 @@
           <div class="card__body">
             <h3>City DayX 2 (BETA)</h3>
             <button class="btn" onclick="openBeta()">Узнать</button>
+          </div>
+        </article>
+        <article class="card">
+          <img class="thumb" src="https://tr.rbxcdn.com/180DAY-95d197836434662466c18c6bf36f8b28/150/150/Image/Webp/noFilter" alt="Racing Friends">
+          <div class="card__body">
+            <h3>Racing Friends</h3>
+            <a href="https://www.roblox.com/games/18311121604/Racing-Friends" target="_blank" class="btn">Играть</a>
           </div>
         </article>
       </div>
