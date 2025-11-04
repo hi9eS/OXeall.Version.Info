@@ -14,47 +14,65 @@
       --accent-soft: #00e5ff22;
       --radius: 12px;
       --shadow: 0 8px 24px #00e5ff18;
+      --glow: 0 0 8px rgba(0,229,255,0.25);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background: radial-gradient(90vw 80vh at 70% -20%, #0b1822 0%, #07090d 60%, #06080b 100%);
       color: var(--text);
       font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+      display: flex; flex-direction: column;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
+    /* HEADER */
     header {
       position: sticky; top: 0; z-index: 10;
-      background: rgba(7, 9, 13, 0.9);
+      background: rgba(7, 9, 13, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #00e5ff11;
     }
     nav {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 14px 22px; max-width: 1200px; margin: auto; flex-wrap: wrap; gap: 12px;
+      padding: 14px 22px; max-width: 1200px; margin: auto;
+      flex-wrap: wrap; gap: 12px;
     }
     .brand {
-      display: flex; align-items: center; gap: 8px; text-decoration: none;
-      color: var(--text); font-weight: 700; font-size: 18px;
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--text);
+      font-weight: 700; font-size: 18px;
     }
-    .dot {
-      width: 10px; height: 10px; background: var(--accent);
-      border-radius: 50%; box-shadow: 0 0 10px var(--accent);
-    }
+    .dot { width:10px; height:10px; background:var(--accent); border-radius:50%; box-shadow:0 0 10px var(--accent); }
 
-    .tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    /* NAVIGATION TABS */
+    .tabs {
+      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+    }
     .tab {
       border: 1px solid var(--accent-soft);
-      color: var(--text); background: #0a0f15;
-      border-radius: 999px; padding: 8px 16px; font-size: 14px;
-      cursor: pointer; transition: all .25s;
+      background: #0a0f15;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 14px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all .25s ease;
+      box-shadow: none;
     }
-    .tab.active { border-color: var(--accent); background: var(--accent); color: #031319; }
-    .tab:hover { box-shadow: 0 0 10px var(--accent-soft); }
+    .tab:hover {
+      border-color: var(--accent);
+      box-shadow: var(--glow);
+      transform: translateY(-1px);
+    }
+    .tab.active {
+      border-color: var(--accent);
+      background: linear-gradient(145deg, var(--accent) 0%, #00c4e0 100%);
+      color: #031319;
+      box-shadow: 0 0 10px rgba(0,229,255,0.4);
+      transform: translateY(-1px);
+    }
 
+    /* LANGUAGE BUTTONS */
     .lang { display: flex; align-items: center; gap: 6px; }
     .lang button {
       background: transparent; border: 1px solid var(--accent-soft);
@@ -63,73 +81,122 @@
     }
     .lang button:hover { background: var(--accent); color: #031319; }
 
+    /* MAIN SECTIONS */
     main { flex: 1; max-width: 1200px; margin: 40px auto; padding: 0 24px; width: 100%; }
     section { display: none; opacity: 0; transition: opacity .4s ease; }
     section.active { display: block; opacity: 1; }
     h2 { font-size: 24px; margin-bottom: 8px; }
     p { color: var(--muted); }
 
+    /* GRID CARDS */
     .grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px; margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
     }
-
     .card {
-      background: var(--panel); border: 1px solid #0e1b2333;
-      border-radius: var(--radius); box-shadow: var(--shadow);
-      overflow: hidden; display: flex; flex-direction: column;
-      transition: transform .25s, box-shadow .25s; position: relative;
+      background: var(--panel);
+      border: 1px solid #0e1b2333;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .25s ease, box-shadow .25s ease;
+      position: relative;
     }
     .card:hover { transform: translateY(-4px); box-shadow: 0 0 16px #00e5ff33; }
 
     .thumb {
-      width: 100%; height: auto; aspect-ratio: 16/9;
-      object-fit: contain; background: #0a1218; border-bottom: 1px solid #0e1b2333;
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: contain;
+      background: #0a1218;
+      border-bottom: 1px solid #0e1b2333;
+      transition: transform .3s ease;
     }
+    .card:hover .thumb { transform: scale(1.03); }
 
     .soon-badge {
       position: absolute; top: 10px; left: 10px;
       background: rgba(0, 229, 255, 0.15);
       border: 1px solid var(--accent);
-      color: var(--accent); font-size: 13px; font-weight: 600;
+      color: var(--accent);
+      font-size: 13px; font-weight: 600;
       padding: 5px 12px; border-radius: 999px;
-      backdrop-filter: blur(4px); cursor: pointer;
+      backdrop-filter: blur(4px);
+      cursor: pointer;
       transition: .25s;
     }
     .soon-badge:hover { background: rgba(0,229,255,0.25); }
 
-    .card__body { padding: 14px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card__body {
+      padding: 14px;
+      flex-grow: 1;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+
     .btn {
-      border: 1px solid var(--accent-soft); background: transparent;
-      color: var(--text); padding: 8px 14px; border-radius: 10px;
-      cursor: pointer; transition: .25s; text-decoration: none; text-align: center; display: inline-block;
+      border: 1px solid var(--accent-soft);
+      background: transparent;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: .25s;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
     }
-    .btn:hover { background: var(--accent); color: #031319; border-color: var(--accent); }
+    .btn:hover {
+      background: var(--accent);
+      color: #031319;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
 
+    /* ABOUT */
     .about {
-      background: var(--panel); border: 1px solid #0e1b2333;
-      border-radius: var(--radius); box-shadow: var(--shadow);
-      padding: 18px 22px; line-height: 1.6;
+      background: var(--panel);
+      border: 1px solid #0e1b2333;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 22px;
+      line-height: 1.6;
     }
 
+    /* FOOTER */
     footer {
-      border-top: 1px solid #00e5ff11; display: flex;
-      justify-content: space-between; align-items: center;
-      font-size: 13px; color: #9ed1df; padding: 14px 24px;
-      flex-wrap: wrap; gap: 10px;
+      border-top: 1px solid #00e5ff11;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: #9ed1df;
+      padding: 14px 24px; flex-wrap: wrap; gap: 10px;
     }
 
+    /* MODAL */
     .modal {
-      display: none; position: fixed; inset: 0;
-      background: #000a; place-items: center; z-index: 99;
+      display: none;
+      position: fixed; inset: 0;
+      background: #000a;
+      place-items: center;
+      z-index: 99;
+      animation: fadeIn .3s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
     }
     .modal-box {
-      background: var(--panel); border: 1px solid var(--accent-soft);
+      background: var(--panel);
+      border: 1px solid var(--accent-soft);
       padding: 26px 26px 20px;
       border-radius: var(--radius);
       box-shadow: 0 10px 40px #000;
       max-width: 460px; width: 90%;
       line-height: 1.6;
+      animation: slideUp .35s ease forwards;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -150,14 +217,14 @@
 
   <main>
     <section id="roblox" class="active">
-      <h2 data-ru="Roblox Игры" data-en="Roblox Games">Roblox Игры</h2>
-      <p data-ru="Все проекты, созданные OXeall Studios." data-en="All projects created by OXeall Studios.">Все проекты, созданные OXeall Studios.</p>
+      <h2>Roblox Игры</h2>
+      <p>Все проекты, созданные <b>OXeall Studios</b>.</p>
       <div class="grid">
         <article class="card">
           <img class="thumb" src="https://tr.rbxcdn.com/180DAY-e53f8d0e48febf30c5baf27d7b5155e2/352/352/Image/Png/noFilter" alt="Russian Town 2071">
           <div class="card__body">
             <h3>Russian Town 2071</h3>
-            <a href="https://www.roblox.com/games/16064252635/2071-VC" target="_blank" class="btn" data-ru="Перейти" data-en="Play">Перейти</a>
+            <a href="https://www.roblox.com/games/16064252635/2071-VC" target="_blank" class="btn">Играть</a>
           </div>
         </article>
 
@@ -165,7 +232,7 @@
           <img class="thumb" src="https://tr.rbxcdn.com/180DAY-65050422dd55f23af40087e5305b689b/352/352/Image/Png/noFilter" alt="City DayX">
           <div class="card__body">
             <h3>City DayX</h3>
-            <a href="https://www.roblox.com/games/12963395883/City-Day-X" target="_blank" class="btn" data-ru="Перейти" data-en="Play">Перейти</a>
+            <a href="https://www.roblox.com/games/12963395883/City-Day-X" target="_blank" class="btn">Играть</a>
           </div>
         </article>
 
@@ -174,7 +241,7 @@
           <img class="thumb" src="https://t2.rbxcdn.com/180DAY-cf7ec8785144e39d59caace447f63ba7" alt="City DayX 2">
           <div class="card__body">
             <h3>City DayX 2</h3>
-            <button class="btn" onclick="openBeta()" data-ru="Узнать" data-en="Info">Узнать</button>
+            <button class="btn" onclick="openBeta()">Подробнее</button>
           </div>
         </article>
 
@@ -182,7 +249,7 @@
           <img class="thumb" src="https://tr.rbxcdn.com/180DAY-95d197836434662466c18c6bf36f8b28/150/150/Image/Webp/noFilter" alt="Racing Friends">
           <div class="card__body">
             <h3>Racing Friends</h3>
-            <a href="https://www.roblox.com/games/18311121604/Racing-Friends" target="_blank" class="btn" data-ru="Перейти" data-en="Play">Перейти</a>
+            <a href="https://www.roblox.com/games/18311121604/Racing-Friends" target="_blank" class="btn">Играть</a>
           </div>
         </article>
       </div>
@@ -202,8 +269,8 @@
   </main>
 
   <footer>
-    <div>Игры созданы OXeall Studios.</div>
-    <div>Version: 1.0.5.1, 25H4</div>
+    <div>Игры созданы OXeall Studios. Несанкционированное копирование и публикация могут привести к ограничению доступа.</div>
+    <div>Version: 1.0.5.2, 25H4</div>
   </footer>
 
   <div class="modal" id="modal">
@@ -212,7 +279,7 @@
       <p style="opacity:0.7; margin-bottom:10px;">Игра рассчитана на игроков 9+.</p>
       <p style="margin-bottom:8px;">City DayX 2 — экспериментальный проект OXeall Studios, продолжающий серию DayX. Здесь тестируются новые технологии, графика и взаимодействие игроков.</p>
       <p style="margin-bottom:12px;">В финальной версии появятся улучшенные эффекты, переработанная карта, новые транспортные средства и система экономики.</p>
-      <p><b>Предварительный выпуск:</b> декабрь 2025 года.<br>
+      <p><b>Ожидаемый запуск:</b> январь 2025 года.<br>
       <span style="opacity:0.8;">Следите за обновлениями на сайте и Roblox.</span></p>
       <button class="btn" onclick="closeBeta()">Закрыть</button>
     </div>
@@ -221,8 +288,7 @@
   <script>
     const tabs = document.querySelectorAll('.tab');
     const sections = document.querySelectorAll('section');
-    const ruBtn = document.getElementById('ru');
-    const enBtn = document.getElementById('en');
+    const modal = document.getElementById('modal');
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -236,18 +302,12 @@
       });
     });
 
-    function setLang(lang) {
-      document.querySelectorAll('[data-ru]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
-      });
-    }
-    ruBtn.onclick = () => setLang('ru');
-    enBtn.onclick = () => setLang('en');
-
-    const modal = document.getElementById('modal');
     function openBeta() { modal.style.display = 'grid'; }
     function openSoon() { modal.style.display = 'grid'; }
-    function closeBeta() { modal.style.display = 'none'; }
+    function closeBeta() {
+      modal.style.animation = 'fadeOut .3s ease forwards';
+      setTimeout(() => { modal.style.display = 'none'; modal.style.animation = ''; }, 280);
+    }
   </script>
 </body>
 </html>
