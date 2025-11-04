@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -15,7 +15,7 @@
       --radius: 12px;
       --shadow: 0 8px 24px #00e5ff18;
       --glow: 0 0 8px rgba(0,229,255,0.25);
-      --shield-glow: 0 0 12px rgba(255, 120, 0, 0.75);
+      --highlight: #f57c00;  /* Новый цвет для улучшенной надписи */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -201,25 +201,12 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* DOCTOR STRANGE SHIELD EFFECT */
-    .brand .magic-shield {
-      display: inline-block;
-      margin-left: 10px;
-      position: relative;
-    }
-    .brand .magic-shield::after {
-      content: '';
-      position: absolute;
-      top: -6px; right: -10px;
-      width: 35px; height: 35px;
-      background: radial-gradient(circle, rgba(255, 120, 0, 0.75) 0%, rgba(255, 120, 0, 0.3) 100%);
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(255, 120, 0, 0.5);
-      animation: shieldSpin 2.5s infinite linear;
-    }
-    @keyframes shieldSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    /* IMPROVED "OXeall Studios Games" */
+    .brand span {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--highlight);
+      text-shadow: 0 0 8px rgba(255, 120, 0, 0.5), 0 0 16px rgba(255, 120, 0, 0.4);
     }
 
   </style>
@@ -227,7 +214,7 @@
 <body>
   <header>
     <nav>
-      <a href="#" class="brand"><div class="dot"></div>OXeall Studios <span class="magic-shield"></span>Games</a>
+      <a href="#" class="brand"><div class="dot"></div>OXeall Studios <span>Games</span></a>
       <div class="tabs">
         <div class="tab active" data-tab="roblox">Roblox Games</div>
         <div class="tab" data-tab="steam">Steam Games</div>
