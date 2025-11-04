@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -14,7 +14,6 @@
       --accent-soft: #00e5ff22;
       --radius: 12px;
       --shadow: 0 8px 24px #00e5ff18;
-      --glow: 0 0 8px rgba(0,229,255,0.25);
       --highlight: #f57c00;  /* Новый цвет для улучшенной надписи */
     }
 
@@ -44,7 +43,6 @@
       text-decoration: none; color: var(--text);
       font-weight: 700; font-size: 18px;
     }
-    .dot { width:10px; height:10px; background:var(--accent); border-radius:50%; box-shadow:0 0 10px var(--accent); }
 
     /* NAVIGATION TABS */
     .tabs {
@@ -63,7 +61,7 @@
     }
     .tab:hover {
       border-color: var(--accent);
-      box-shadow: var(--glow);
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.25);
       transform: translateY(-1px);
     }
     .tab.active {
@@ -73,15 +71,6 @@
       box-shadow: 0 0 10px rgba(0,229,255,0.4);
       transform: translateY(-1px);
     }
-
-    /* LANGUAGE BUTTONS */
-    .lang { display: flex; align-items: center; gap: 6px; }
-    .lang button {
-      background: transparent; border: 1px solid var(--accent-soft);
-      color: var(--text); padding: 6px 10px; border-radius: 999px;
-      cursor: pointer; transition: .25s;
-    }
-    .lang button:hover { background: var(--accent); color: #031319; }
 
     /* MAIN SECTIONS */
     main { flex: 1; max-width: 1200px; margin: 40px auto; padding: 0 24px; width: 100%; }
@@ -118,19 +107,6 @@
     }
     .card:hover .thumb { transform: scale(1.03); }
 
-    .soon-badge {
-      position: absolute; top: 10px; left: 10px;
-      background: rgba(0, 229, 255, 0.15);
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-size: 13px; font-weight: 600;
-      padding: 5px 12px; border-radius: 999px;
-      backdrop-filter: blur(4px);
-      cursor: pointer;
-      transition: .25s;
-    }
-    .soon-badge:hover { background: rgba(0,229,255,0.25); }
-
     .card__body {
       padding: 14px;
       flex-grow: 1;
@@ -154,16 +130,6 @@
       color: #031319;
       border-color: var(--accent);
       transform: translateY(-2px);
-    }
-
-    /* ABOUT */
-    .about {
-      background: var(--panel);
-      border: 1px solid #0e1b2333;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 22px;
-      line-height: 1.6;
     }
 
     /* FOOTER */
@@ -227,7 +193,46 @@
   </header>
 
   <main>
-    <!-- Контент останется прежним -->
+    <section id="roblox" class="active">
+      <h2>Roblox Games</h2>
+      <p>Все проекты, созданные <b>OXeall Studios</b>. Ниже приведён список активных игр.</p>
+      <div class="grid">
+        <article class="card">
+          <img class="thumb" src="https://tr.rbxcdn.com/180DAY-e53f8d0e48febf30c5baf27d7b5155e2/352/352/Image/Png/noFilter" alt="Russian Town 2071">
+          <div class="card__body">
+            <h3>Russian Town 2071</h3>
+            <a href="https://www.roblox.com/games/16064252635/2071-VC" target="_blank" class="btn">Играть</a>
+          </div>
+        </article>
+        <article class="card">
+          <img class="thumb" src="https://tr.rbxcdn.com/180DAY-65050422dd55f23af40087e5305b689b/352/352/Image/Png/noFilter" alt="City DayX">
+          <div class="card__body">
+            <h3>City DayX</h3>
+            <a href="https://www.roblox.com/games/12963395883/City-Day-X" target="_blank" class="btn">Играть</a>
+          </div>
+        </article>
+        <article class="card">
+          <img class="thumb" src="https://t2.rbxcdn.com/180DAY-cf7ec8785144e39d59caace447f63ba7" alt="City DayX 2">
+          <div class="card__body">
+            <h3>City DayX 2 (BETA)</h3>
+            <button class="btn" onclick="openBeta()">Узнать</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="steam">
+      <h2>Steam Games</h2>
+      <p>Этот раздел пока в разработке. В будущем здесь появятся проекты <b>OXeall Studios</b> для Steam.</p>
+    </section>
+
+    <section id="about">
+      <h2>About OXeall</h2>
+      <div class="about">
+        <p>OXeall — технологическая инициатива, начавшаяся в 2023 году, ориентированная на скорость, точность и развитие инженерных решений.</p>
+        <p>OXeall Studios — игровое подразделение, созданное в 2025 году. Здесь рождаются концепции, механики и проекты, задающие новые стандарты игрового будущего.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -236,13 +241,17 @@
   </footer>
 
   <div class="modal" id="modal">
-    <!-- Модальные окна и контент -->
+    <div class="modal-box">
+      <h3>City DayX 2 (BETA)</h3>
+      <p>Игра находится на стадии BETA. Возможны ошибки и недоступность на устройствах. Перейти к тестовой версии?</p>
+      <button class="btn" onclick="goBeta()">Перейти</button>
+      <button class="btn" onclick="closeBeta()">Отмена</button>
+    </div>
   </div>
 
   <script>
     const tabs = document.querySelectorAll('.tab');
     const sections = document.querySelectorAll('section');
-    const modal = document.getElementById('modal');
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
@@ -250,14 +259,18 @@
         const target = tab.dataset.tab;
         sections.forEach(sec => {
           sec.classList.remove('active');
-          if (sec.id === target) sec.classList.add('active');
+          if(sec.id === target) sec.classList.add('active');
         });
       });
     });
 
+    const modal = document.getElementById('modal');
     function openBeta() { modal.style.display = 'grid'; }
-    function openSoon() { modal.style.display = 'grid'; }
     function closeBeta() { modal.style.display = 'none'; }
+    function goBeta() {
+      window.open('https://www.roblox.com/games/91741785184440/City-Day-X', '_blank');
+      closeBeta();
+    }
   </script>
 </body>
 </html>
