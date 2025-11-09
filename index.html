@@ -1,718 +1,269 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>OXeall Studios — Games Changelog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="OXeall Studios — официальный портал обновлений и патч-ноутов по играм студии." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OXeall Studios Games</title>
   <style>
-    :root {
-      --bg: #02040a;
-      --bg-gradient: radial-gradient(circle at top, rgba(0,180,255,0.12), transparent 65%);
-      --bg-card: #070b13;
-      --bg-card-soft: #0b101a;
-      --accent: #00aaff;
-      --accent-soft: rgba(0,170,255,0.16);
-      --accent-strong: #35c3ff;
-      --accent-alt: #00ffc6;
-      --text: #f5f7ff;
-      --muted: #9aa7c5;
-      --border: #202838;
-      --radius-xl: 22px;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 52px rgba(0,0,0,0.9);
-      --shadow-strong: 0 26px 90px rgba(0,0,0,0.98);
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --tr-fast: 0.18s ease-out;
+    :root{
+      --bg:#05070b;--panel:#0a0f16;--panel2:#0d1420;--line:#162235;
+      --text:#e8f7ff;--muted:#9fb8c6;--accent:#00d5ff;--accent-soft:rgba(0,213,255,.18);
+      --radius:14px;--shadow:0 12px 36px rgba(0,0,0,.35)
     }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:radial-gradient(90vw 80vh at 70% -20%,#0b1822 0%,#070a10 55%,#05070b 100%);color:var(--text);font-family:system-ui,Segoe UI,Roboto,Inter,sans-serif;overflow-x:hidden}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* header */
+    header{position:sticky;top:0;z-index:10;background:rgba(5,7,11,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    nav{max-width:1200px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+    .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:800;letter-spacing:.2px}
+    .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+    .tabs{display:flex;gap:10px;align-items:center}
+    .tab{border:1px solid var(--line);background:#0a0f16;border-radius:999px;padding:8px 16px;color:var(--text);cursor:pointer;transition:.22s}
+    .tab:hover{border-color:var(--accent)}
+    .tab.active{background:#0f1826;border-color:#1a2a40}
+    .search-btn{height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#0a0f16;color:var(--text);font-weight:600;cursor:pointer;transition:.25s}
+    .search-btn:hover{border-color:var(--accent)}
 
-    body {
-      font-family: var(--font-main);
-      background: var(--bg-gradient), var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+    /* content wrapper fade */
+    #content{transition:opacity .25s ease}
+    #content.fading{opacity:.85}
 
-    .page {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 22px 18px 40px;
-    }
+    main{max-width:1200px;margin:36px auto;padding:0 20px}
+    .section-title{font-size:26px;margin-bottom:6px}
+    .section-sub{color:var(--muted);margin-bottom:18px}
 
-    a {
-      color: var(--accent-strong);
-      text-decoration: none;
-    }
-    a:hover { text-decoration: underline; }
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+    .card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;position:relative;transition:transform .25s ease,box-shadow .25s ease}
+    .card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,213,255,.12)}
+    .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0a1218}
+    .badge{position:absolute;top:10px;left:10px;padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px;pointer-events:none}
+    .badge.soon{background:rgba(0,213,255,.14);border:1px solid var(--accent);color:var(--accent)}
+    .badge.year{background:rgba(255,157,0,.12);border:1px solid #ff9d00;color:#ffb24a}
+    .card__body{padding:16px;display:flex;flex-direction:column;gap:12px}
+    .title{font-size:18px;font-weight:700}
+    .play-container{display:flex;align-items:center;gap:8px}
+    .btn-play{flex:1;text-align:center;border:1px solid var(--line);background:#0b121b;color:var(--text);padding:12px 0;border-radius:10px;cursor:pointer;transition:.22s;font-weight:700;text-decoration:none}
+    .btn-play:hover{background:#0f1a26}
+    .copy-btn{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:#0b121b;border-radius:10px;cursor:pointer;transition:.22s}
+    .copy-btn svg{width:20px;height:20px;fill:var(--text);transition:.22s}
+    .copy-btn:hover{border-color:var(--accent)}
+    .copy-btn:hover svg{fill:var(--accent)}
 
-    /* HEADER */
+    /* search slide */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .35s ease;z-index:998}
+    .overlay.active{opacity:1;pointer-events:auto}
+    .search-slide{position:fixed;top:20px;right:-360px;width:300px;border-radius:16px 0 0 16px;background:rgba(13,20,32,.9);box-shadow:-8px 0 25px rgba(0,0,0,.45);transition:right .45s ease;z-index:999;display:flex;flex-direction:column;padding:40px 20px;backdrop-filter:blur(10px)}
+    .search-slide.active{right:20px}
+    .search-slide input{width:100%;padding:12px;border:none;border-radius:10px;background:#0a121b;color:var(--text);outline:none;box-shadow:inset 0 0 0 1px var(--line)}
+    .search-slide .close-btn{position:absolute;top:10px;right:15px;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer}
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 14px 18px;
-      border-radius: var(--radius-xl);
-      background: linear-gradient(135deg, rgba(0,170,255,0.16), rgba(2,4,10,0.98));
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow-soft);
-      position: sticky;
-      top: 10px;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-    }
+    /* toast */
+    .toast{position:fixed;bottom:28px;right:28px;background:#0a0f16;border:1px solid var(--line);padding:14px 20px;border-radius:12px;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.45);opacity:0;transform:translateY(16px);transition:opacity .35s,transform .35s;z-index:9999;font-weight:650;letter-spacing:.2px}
+    .toast.show{opacity:1;transform:translateY(0)}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    /* footer */
+    .footer{margin:44px 0 26px;text-align:center;font-size:13px;color:#8aa0b5;opacity:.9;padding-top:22px;border-top:1px solid var(--line)}
+    .footer strong{color:#bfefff}
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: radial-gradient(circle at 18% 0, #ffffff, #00aaff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 20px;
-      color: #020308;
-      box-shadow: 0 12px 26px rgba(0,0,0,0.98);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-text span:first-child {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent-alt);
-    }
-
-    .brand-text span:last-child {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .nav-pill {
-      padding: 6px 11px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.78);
-      border: 1px solid rgba(255,255,255,0.09);
-      display: inline-flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .nav-pill span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    /* TOP */
-
-    .top {
-      margin: 24px 2px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .top h1 {
-      font-size: 26px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-
-    .top p {
-      font-size: 13px;
-      color: var(--muted);
-      max-width: 640px;
-      line-height: 1.6;
-    }
-
-    .filters {
-      margin-top: 6px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .select,
-    .search {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: var(--bg-card-soft);
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.9);
-      font-size: 11px;
-    }
-
-    .select label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-    }
-
-    .select select {
-      border: none;
-      background: transparent;
-      color: var(--text);
-      font-size: 11px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .search input {
-      border: none;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-size: 11px;
-      min-width: 180px;
-    }
-
-    .tag {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,170,255,0.35);
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* FEATURED */
-
-    .featured {
-      margin-top: 16px;
-      margin-bottom: 12px;
-    }
-
-    .featured-box {
-      padding: 14px 16px 12px;
-      border-radius: var(--radius-xl);
-      background: var(--bg-card-soft);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .featured-box.empty {
-      border-style: dashed;
-      opacity: 0.86;
-      color: var(--muted);
-      background: rgba(4,7,14,0.98);
-    }
-
-    .featured-label {
-      font-size: 9px;
-      color: var(--accent-strong);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .featured-title {
-      font-size: 18px;
-      font-weight: 500;
-    }
-
-    .featured-sub {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .featured-meta {
-      font-size: 9px;
-      color: var(--muted);
-    }
-
-    /* LIST HEADER */
-
-    .list-header {
-      margin: 16px 2px 8px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: baseline;
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .list-header strong {
-      color: var(--accent-strong);
-      font-size: 11px;
-      font-weight: 500;
-    }
-
-    /* FEED / CARDS */
-
-    .announcements {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .empty-state {
-      font-size: 11px;
-      color: var(--muted);
-      padding: 12px 13px;
-      border-radius: var(--radius-lg);
-      border: 1px dashed rgba(255,255,255,0.22);
-      background: rgba(5,8,16,0.98);
-      margin-top: 4px;
-    }
-
-    .card {
-      padding: 14px 16px 10px;
-      border-radius: var(--radius-xl);
-      background: var(--bg-card);
-      border: 1px solid rgba(0,170,255,0.13);
-      box-shadow: var(--shadow-soft);
-      display: grid;
-      grid-template-columns: minmax(0, 2.6fr) minmax(0, 1.4fr) auto;
-      column-gap: 14px;
-      row-gap: 6px;
-      align-items: flex-start;
-      position: relative;
-      cursor: pointer;
-      transition: all var(--tr-fast);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(4px);
-      animation: fadeInUp 0.22s forwards;
-    }
-
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(circle at top left, rgba(0,255,198,0.08), transparent 55%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--tr-fast);
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-strong);
-      border-color: rgba(0,170,255,0.45);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card-header {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 10px;
-      color: var(--muted);
-      grid-column: 1 / 3;
-    }
-
-    .badge-type {
-      padding: 4px 12px 3px;
-      border-radius: 999px;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.12);
-      text-shadow: 0 0 6px rgba(0,0,0,0.9);
-      box-shadow: 0 0 12px rgba(0,0,0,0.9) inset;
-      color: #fff;
-    }
-
-    .badge-type.major {
-      background: linear-gradient(to right, #1dd6ff, #0064ff);
-      box-shadow: 0 0 14px rgba(0,132,255,0.7);
-    }
-
-    .badge-type.minor {
-      background: linear-gradient(to right, #ffe07a, #c4a100);
-      color: #111;
-      box-shadow: 0 0 14px rgba(255,224,122,0.5);
-    }
-
-    .badge-type.patch {
-      background: linear-gradient(to right, #6dffb5, #00a85a);
-      color: #021008;
-      box-shadow: 0 0 14px rgba(0,200,130,0.5);
-    }
-
-    .badge-type.hotfix {
-      background: linear-gradient(to right, #ff8fa3, #ff0033);
-      box-shadow: 0 0 16px rgba(255,0,51,0.8);
-    }
-
-    .badge-game {
-      color: var(--accent-strong);
-      font-size: 10px;
-    }
-
-    .badge-version {
-      padding: 3px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      font-size: 9px;
-      color: var(--muted);
-    }
-
-    .badge-date {
-      font-size: 9px;
-      color: var(--muted);
-    }
-
-    .card-title {
-      grid-column: 1 / 3;
-      font-size: 17px;
-      font-weight: 500;
-    }
-
-    .card-short {
-      grid-column: 1 / 3;
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    .card-tags {
-      grid-column: 1 / 3;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 2px;
-    }
-
-    .card-tag {
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(4,7,14,1);
-      color: var(--muted);
-      font-size: 9px;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .card-arrow {
-      font-size: 10px;
-      color: var(--muted);
-      align-self: flex-start;
-      margin-top: 2px;
-      transition: transform var(--tr-fast), color var(--tr-fast);
-    }
-
-    .card-changelog {
-      grid-column: 1 / 4;
-      display: none;
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.8;
-      white-space: pre-line;
-    }
-
-    .card.open .card-changelog { display: block; }
-    .card.open .card-arrow {
-      transform: rotate(180deg);
-      color: var(--accent-strong);
-    }
-
-    footer {
-      margin-top:22px;
-      font-size:9px;
-      color:var(--muted);
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      border-top:1px solid rgba(255,255,255,0.06);
-      padding-top:8px;
-    }
-
-    @media (max-width: 900px) {
-      header { flex-direction: column; align-items: flex-start; }
-      .card {
-        grid-template-columns: minmax(0, 1.7fr) auto;
-      }
-      .card-header,
-      .card-title,
-      .card-short,
-      .card-tags,
-      .card-changelog {
-        grid-column: 1 / 3;
-      }
-    }
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;place-items:center;z-index:1000}
+    .modal.active{display:grid}
+    .modal .back{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+    .modal .box{position:relative;background:#0d1420;border:1px solid var(--line);border-radius:16px;padding:22px 22px;max-width:520px;width:92%;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+    .modal .closeX{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#0b1320;color:#e6f7ff;font-size:18px;cursor:pointer}
   </style>
 </head>
 <body>
-<div class="page">
   <header>
-    <div class="brand">
-      <div class="brand-logo">OX</div>
-      <div class="brand-text">
-        <span>OXEall Studios — Games Changelog</span>
-        <span>Официальная лента обновлений OXeall Studios</span>
-      </div>
-    </div>
     <nav>
-      <div class="nav-pill"><span class="dot"></span>Official Updates Feed</div>
-      <div class="nav-pill">Steam-inspired • OXeall Design</div>
+      <a href="#" class="brand"><span class="logo-dot"></span><span>OXeall Studios Games</span></a>
+      <div class="tabs">
+        <div class="tab active" data-target="roblox">Roblox Games</div>
+        <div class="tab" data-target="steam">Steam Games</div>
+        <div class="tab" data-target="about">About</div>
+        <button class="search-btn" id="searchToggle">SEARCH</button>
+      </div>
     </nav>
   </header>
 
-  <section class="top">
-    <h1>Лента обновлений по играм OXeall Studios</h1>
-    <p>
-      Все Major, Minor, Patch и Hotfix обновления студии — в одном месте. Чтобы добавить новое обновление,
-      отредактируй HTML-блоки ниже (см. комментарий в коде).
-    </p>
-    <div class="filters">
-      <div class="select">
-        <label for="gameFilter">Игра</label>
-        <select id="gameFilter">
-          <option value="all">Все проекты</option>
-        </select>
-      </div>
-      <div class="search">
-        <input type="text" id="searchInput" placeholder="Поиск по названию, игре, изменениям..." />
-      </div>
-      <div class="tag">Developer Verified • OXeall</div>
-    </div>
-  </section>
+  <div id="content">
+    <main>
+      <section id="roblox" class="page active">
+        <h2 class="section-title">Roblox Games</h2>
+        <p class="section-sub">Active projects by <b>OXeall Studios</b>.</p>
+        <div class="grid" id="gridRoblox">
+          <div class="card" data-title="Russian Town 2071" data-status="released" data-platform="Roblox">
+            <span class="badge year">2024</span>
+            <img class="thumb" src="https://tr.rbxcdn.com/180DAY-e53f8d0e48febf30c5baf27d7b5155e2/352/352/Image/Png/noFilter" alt="Russian Town 2071">
+            <div class="card__body">
+              <div class="title">Russian Town 2071</div>
+              <div class="play-container">
+                <a href="https://www.roblox.com/games/16064252635/2071-VC" target="_blank" class="btn-play" rel="noopener">PLAY</a>
+                <button class="copy-btn" data-copy="https://www.roblox.com/games/16064252635/2071-VC">
+                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
 
-  <section class="featured">
-    <div class="featured-box empty" id="featuredBox">
-      <div class="featured-label">Featured обновление не выбрано</div>
-      <div class="featured-sub">
-        Чтобы отметить ключевое обновление — добавь атрибут
-        <b>data-featured="true"</b> к нужной карточке в HTML.
-      </div>
-    </div>
-  </section>
+          <div class="card" data-title="City DayX" data-status="released" data-platform="Roblox">
+            <span class="badge year">2023</span>
+            <img class="thumb" src="https://tr.rbxcdn.com/180DAY-65050422dd55f23af40087e5305b689b/352/352/Image/Png/noFilter" alt="City DayX">
+            <div class="card__body">
+              <div class="title">City DayX</div>
+              <div class="play-container">
+                <a href="https://www.roblox.com/games/12963395883/City-Day-X" target="_blank" class="btn-play" rel="noopener">PLAY</a>
+                <button class="copy-btn" data-copy="https://www.roblox.com/games/12963395883/City-Day-X">
+                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
 
-  <div class="list-header">
-    <div><strong>Все обновления</strong></div>
-    <div>Нажми на карточку, чтобы раскрыть подробный changelog.</div>
+          <div class="card" data-title="City DayX 2" data-status="unreleased" data-platform="Roblox">
+            <span class="badge soon">SOON Q1 2026</span>
+            <img class="thumb" src="https://t2.rbxcdn.com/180DAY-cf7ec8785144e39d59caace447f63ba7" alt="City DayX 2">
+            <div class="card__body">
+              <div class="title">City DayX 2</div>
+              <div class="play-container">
+                <button class="btn-play" data-learn="City DayX 2">LEARN MORE</button>
+                <button class="copy-btn" data-copy="https://www.roblox.com/games/91741785184440/City-Day-X">
+                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-title="Racing Friends" data-status="released" data-platform="Roblox">
+            <span class="badge year">2024</span>
+            <img class="thumb" src="https://tr.rbxcdn.com/180DAY-95d197836434662466c18c6bf36f8b28/150/150/Image/Webp/noFilter" alt="Racing Friends">
+            <div class="card__body">
+              <div class="title">Racing Friends</div>
+              <div class="play-container">
+                <a href="https://www.roblox.com/games/18311121604/Racing-Friends" target="_blank" class="btn-play" rel="noopener">PLAY</a>
+                <button class="copy-btn" data-copy="https://www.roblox.com/games/18311121604/Racing-Friends">
+                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="steam" class="page" style="display:none">
+        <h2 class="section-title">Steam Games</h2>
+        <p class="section-sub">Coming soon…</p>
+        <div class="grid" id="gridSteam"><!-- пусто, появится позже --></div>
+      </section>
+
+      <section id="about" class="page" style="display:none">
+        <h2 class="section-title">About</h2>
+        <p class="section-sub">OXeall — technology initiative started in 2023, focused on speed and engineering. OXeall Studios is the game division.</p>
+      </section>
+    </main>
+
+    <div class="footer">
+      Games by <strong>OXeall Studios</strong>. Unauthorized copying/publishing may lead to access limitations. <br />
+      Version <strong>1.1.0.0.5</strong> | Build 25H4.
+    </div>
   </div>
 
-  <div id="emptyState" class="empty-state">
-    Обновления пока не добавлены. Открой код файла <b>index.html</b> и добавь первую карточку по шаблону.
+  <!-- Search UI -->
+  <div class="overlay" id="overlay"></div>
+  <div class="search-slide" id="searchSlide">
+    <button class="close-btn" id="closeSearch">×</button>
+    <input type="text" id="searchInput" placeholder="Search games or status (Released / Unreleased)..." />
   </div>
 
-  <section id="announcementList" class="announcements">
+  <!-- Modal Learn More -->
+  <div class="modal" id="modal">
+    <div class="back" id="modalBack"></div>
+    <div class="box">
+      <button class="closeX" id="modalClose">×</button>
+      <h3>City DayX 2 — SOON</h3>
+      <p style="color:#9fb8c6;margin:8px 0 6px">Age 9+.</p>
+      <p style="margin-bottom:10px">Experimental sequel in the DayX line. New tech, visuals, and interactions under active testing.</p>
+      <p><b>Expected launch:</b> January 2026. Follow updates on the site and Roblox.</p>
+    </div>
+  </div>
 
-    <!--
-      ШАБЛОН ДЛЯ НОВОГО ОБНОВЛЕНИЯ
-      ---------------------------------
-      1. Скопируй блок <article class="card"> ... </article>
-      2. Поставь свои:
-         - data-game="НазваниеИгры"
-         - data-type="Major|Minor|Patch|Hotfix"
-         - Нужные тексты внутри (заголовок, версия, дата, описание, changelog)
-      3. Если хочешь сделать его главным — добавь data-featured="true"
-         к article. Только у одного обновления должен быть этот атрибут.
+  <div class="toast" id="toast">Link copied</div>
 
-      ПРИМЕР НИЖЕ — просто отредактируй под свои данные.
-    -->
+  <script>
+    // Tabs with fade
+    const content = document.getElementById('content');
+    const tabs = document.querySelectorAll('.tab');
+    const pages = document.querySelectorAll('.page');
 
-    <article class="card"
-             data-game="Example Game"
-             data-type="Major"
-             data-featured="true">
-      <div class="card-header">
-        <div class="badge-type major">MAJOR UPDATE</div>
-        <div class="badge-game">Example Game</div>
-        <div class="badge-version">v1.0.0</div>
-        <div class="badge-date">09 ноя 2025</div>
-      </div>
-      <div class="card-title">Стартовый пример обновления для OXeall Studios</div>
-      <div class="card-short">
-        Замените этот текст на краткое описание вашего настоящего обновления. 1–3 строки, самое важное.
-      </div>
-      <div class="card-tags">
-        <div class="card-tag">Release</div>
-        <div class="card-tag">PC</div>
-        <div class="card-tag">OXeall</div>
-      </div>
-      <div class="card-arrow">▼</div>
-      <div class="card-changelog">
-Полный список изменений:
-- Добавьте сюда реальные изменения.
-- Например: новый режим, новая карта, оптимизация FPS.
-- Удалите этот пример, когда добавите свои данные.
-      </div>
-    </article>
-
-    <!--
-    СКОПИРУЙ ЭТОТ БЛОК НИЖЕ ДЛЯ НОВОГО ОБНОВЛЕНИЯ:
-
-    <article class="card"
-             data-game="Название Игры"
-             data-type="Patch">
-      <div class="card-header">
-        <div class="badge-type patch">PATCH UPDATE</div>
-        <div class="badge-game">Название Игры</div>
-        <div class="badge-version">v1.0.1</div>
-        <div class="badge-date">10 ноя 2025</div>
-      </div>
-      <div class="card-title">Краткий заголовок обновления</div>
-      <div class="card-short">
-        Краткое описание: что пофиксили или добавили.
-      </div>
-      <div class="card-tags">
-        <div class="card-tag">Patch</div>
-        <div class="card-tag">Balance</div>
-      </div>
-      <div class="card-arrow">▼</div>
-      <div class="card-changelog">
-- Список изменённых параметров
-- Исправление вылетов
-- Улучшение производительности
-      </div>
-    </article>
-
-    -->
-
-  </section>
-
-  <footer>
-    <div>© <span id="year"></span> OXeall Studios. Games Changelog.</div>
-    <div>Все обновления добавляются вручную через HTML этого файла.</div>
-  </footer>
-</div>
-
-<script>
-  // Подставляем год
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  const featuredBox = document.getElementById('featuredBox');
-  const emptyState = document.getElementById('emptyState');
-  const list = document.getElementById('announcementList');
-  const cards = Array.from(list.querySelectorAll('.card'));
-
-  // Если есть хотя бы одна карточка — убираем "пусто"
-  if (cards.length > 0) {
-    emptyState.style.display = 'none';
-  }
-
-  // Featured: берём первую карточку с data-featured="true"
-  function setupFeatured() {
-    const featured = cards.find(c => c.dataset.featured === 'true');
-    if (!featured) return;
-
-    featuredBox.classList.remove('empty');
-    const title = featured.querySelector('.card-title')?.textContent || '';
-    const short = featured.querySelector('.card-short')?.textContent || '';
-    const game = featured.dataset.game || featured.querySelector('.badge-game')?.textContent || 'OXeall Project';
-    const type = featured.dataset.type || 'Major';
-    const date = featured.querySelector('.badge-date')?.textContent || '';
-    const version = featured.querySelector('.badge-version')?.textContent || '';
-    const tags = Array.from(featured.querySelectorAll('.card-tag')).map(t => t.textContent);
-
-    featuredBox.innerHTML = `
-      <div class="featured-label">${type.toUpperCase()} UPDATE • ${game}</div>
-      <div class="featured-title">${title}</div>
-      <div class="featured-sub">${short}</div>
-      <div class="featured-meta">
-        ${date}
-        ${version ? ' · ' + version : ''}
-        ${tags.length ? ' · ' + tags.join(', ') : ''}
-      </div>
-    `;
-  }
-
-  // Клик по карточке — раскрытие changelog
-  function setupCardToggles() {
-    cards.forEach(card => {
-      const arrow = card.querySelector('.card-arrow');
-      const changelog = card.querySelector('.card-changelog');
-      if (!arrow || !changelog) return;
-      card.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A' || e.target.closest('a')) return;
-        card.classList.toggle('open');
-      });
-    });
-  }
-
-  // Фильтр по игре + поиск
-  function setupFilters() {
-    const gameSelect = document.getElementById('gameFilter');
-    const searchInput = document.getElementById('searchInput');
-
-    const games = Array.from(new Set(cards.map(c => c.dataset.game).filter(Boolean)));
-    games.forEach(g => {
-      const opt = document.createElement('option');
-      opt.value = g;
-      opt.textContent = g;
-      gameSelect.appendChild(opt);
-    });
-
-    function applyFilters() {
-      const g = gameSelect.value;
-      const q = (searchInput.value || '').toLowerCase().trim();
-
-      cards.forEach(card => {
-        const cardGame = card.dataset.game || '';
-        const text = (
-          card.textContent +
-          ' ' +
-          (card.dataset.game || '') +
-          ' ' +
-          (card.dataset.type || '')
-        ).toLowerCase();
-
-        const matchGame = (g === 'all') || (cardGame === g);
-        const matchSearch = !q || text.includes(q);
-
-        card.style.display = (matchGame && matchSearch) ? '' : 'none';
-      });
+    function showPage(targetId){
+      content.classList.add('fading');
+      setTimeout(()=>{
+        pages.forEach(p=>{
+          const show = p.id === targetId;
+          p.style.display = show ? 'block' : 'none';
+        });
+        tabs.forEach(t=>t.classList.toggle('active', t.dataset.target===targetId));
+        content.classList.remove('fading');
+      },120);
     }
 
-    gameSelect.addEventListener('change', applyFilters);
-    searchInput.addEventListener('input', applyFilters);
-    applyFilters();
-  }
+    tabs.forEach(t=>t.addEventListener('click', ()=>showPage(t.dataset.target)));
 
-  setupFeatured();
-  setupCardToggles();
-  setupFilters();
-</script>
+    // Search slide
+    const searchToggle=document.getElementById('searchToggle');
+    const searchSlide=document.getElementById('searchSlide');
+    const closeSearch=document.getElementById('closeSearch');
+    const overlay=document.getElementById('overlay');
+    const searchInput=document.getElementById('searchInput');
+
+    searchToggle.addEventListener('click',()=>{searchSlide.classList.add('active');overlay.classList.add('active');searchInput.focus();});
+    function closeSearchUI(){searchSlide.classList.remove('active');overlay.classList.remove('active');}
+    closeSearch.addEventListener('click',closeSearchUI);
+    overlay.addEventListener('click',closeSearchUI);
+
+    // Filter across ALL cards (Roblox + Steam)
+    const allCards = () => document.querySelectorAll('.card');
+    searchInput.addEventListener('input', ()=>{
+      const q = searchInput.value.toLowerCase().trim();
+      // During search, make both lists visible for overview
+      if(q){
+        document.getElementById('roblox').style.display='block';
+        document.getElementById('steam').style.display='block';
+        document.getElementById('about').style.display='none';
+      }
+      allCards().forEach(card=>{
+        const title=(card.dataset.title||'').toLowerCase();
+        const status=(card.dataset.status||'').toLowerCase();
+        card.style.display = (!q || title.includes(q) || status.includes(q)) ? 'block' : 'none';
+      });
+    });
+
+    // Copy link (delegation)
+    const toast=document.getElementById('toast');
+    document.addEventListener('click',e=>{
+      const copy = e.target.closest('[data-copy]');
+      if(copy){
+        const url = copy.getAttribute('data-copy');
+        navigator.clipboard.writeText(url).then(()=>{
+          toast.textContent='Link copied';
+          toast.classList.add('show');
+          setTimeout(()=>toast.classList.remove('show'),2200);
+        });
+      }
+      const learn = e.target.closest('[data-learn]');
+      if(learn){ openModal(); }
+    });
+
+    // Modal
+    const modal=document.getElementById('modal');
+    const modalBack=document.getElementById('modalBack');
+    const modalClose=document.getElementById('modalClose');
+    function openModal(){ modal.classList.add('active'); }
+    function closeModal(){ modal.classList.remove('active'); }
+    modalBack.addEventListener('click',closeModal);
+    modalClose.addEventListener('click',closeModal);
+  </script>
 </body>
 </html>
