@@ -2,47 +2,44 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>OXeall Studios | CLNEWS — Official Updates Hub</title>
+  <title>OXeall Studios | CLNEWS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Официальный хаб новостей и обновлений игр OXeall Studios." />
+  <meta name="description" content="Официальная лента обновлений и новостей игр OXeall Studios." />
   <style>
     :root {
-      --bg: #05070c;
-      --bg-soft: #0b1017;
-      --bg-soft-2: #141a24;
-      --accent: #1999ff;
-      --accent-soft: rgba(25,153,255,0.16);
-      --accent-alt: #66c6ff;
-      --text: #f5f7fa;
-      --muted: #9ea7b5;
-      --border: #202735;
-      --danger: #ff4a6a;
-      --radius-xl: 22px;
+      --bg: #05070b;
+      --bg-panel: #0b0f17;
+      --bg-card: #0f141d;
+      --accent: #1a9fff;
+      --accent-soft: rgba(26,159,255,0.14);
+      --accent-strong: #55c6ff;
+      --text: #f5f7fb;
+      --muted: #a5afc3;
+      --border: #202736;
+      --radius-lg: 18px;
       --radius-md: 12px;
-      --transition-fast: 0.18s ease-out;
-      --transition-mid: 0.26s ease-out;
-      --shadow-soft: 0 18px 40px rgba(0,0,0,0.6);
+      --shadow: 0 18px 42px rgba(0,0,0,0.8);
       --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --tr-fast: 0.18s ease-out;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: var(--font-main);
       background:
-        radial-gradient(circle at top, rgba(35,71,122,0.18), transparent 55%),
-        radial-gradient(circle at top left, rgba(25,153,255,0.04), transparent 55%),
+        radial-gradient(circle at top, rgba(26,159,255,0.09), transparent 55%),
         #020308;
       color: var(--text);
       min-height: 100vh;
     }
 
     a {
-      color: var(--accent-alt);
+      color: var(--accent-strong);
       text-decoration: none;
     }
 
@@ -51,155 +48,137 @@
     }
 
     .page {
-      max-width: 1250px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 22px 16px 40px;
     }
+
+    /* HEADER */
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 16px;
       padding: 14px 18px;
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(135deg, rgba(25,153,255,0.16), rgba(0,0,0,0.98));
-      box-shadow: var(--shadow-soft);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(
+        135deg,
+        rgba(26,159,255,0.16),
+        rgba(3,5,10,0.98)
+      );
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
       position: sticky;
       top: 10px;
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(255,255,255,0.05);
       z-index: 30;
+      backdrop-filter: blur(14px);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand-logo {
       width: 34px;
       height: 34px;
       border-radius: 10px;
-      background:
-        radial-gradient(circle at 25% 0, #ffffff, #1999ff);
+      background: radial-gradient(circle at 25% 0, #ffffff, #1a9fff);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       font-size: 18px;
       color: #020308;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.9);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.9);
     }
 
-    .brand-title {
+    .brand-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .brand-title span:first-child {
+    .brand-text span:first-child {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--accent-alt);
+      letter-spacing: 0.16em;
+      color: var(--accent-strong);
     }
 
-    .brand-title span:last-child {
-      font-size: 13px;
+    .brand-text span:last-child {
+      font-size: 12px;
       color: var(--muted);
     }
 
     nav {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
       justify-content: flex-end;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--muted);
     }
 
-    .nav-link {
+    .nav-pill {
       padding: 6px 10px;
       border-radius: 999px;
-      cursor: pointer;
-      transition: all var(--transition-fast);
+      border: 1px solid transparent;
+      cursor: default;
       display: flex;
       align-items: center;
       gap: 6px;
+      background: rgba(0,0,0,0.55);
     }
 
-    .nav-link span.dot {
+    .nav-pill span.dot {
       width: 6px;
       height: 6px;
       border-radius: 999px;
       background: var(--accent);
-      display: none;
     }
 
-    .nav-link.active {
-      background: var(--accent-soft);
-      color: var(--accent-alt);
-    }
+    /* TOP SECTION */
 
-    .nav-link.active span.dot {
-      display: inline-block;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,0.03);
-      transform: translateY(-1px);
-      color: var(--accent-alt);
-    }
-
-    /* Top intro */
-
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
+    .top {
       margin: 22px 2px 14px;
-      flex-wrap: wrap;
-    }
-
-    .top-title {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 8px;
     }
 
-    .top-title h1 {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+    .top h1 {
+      font-size: 24px;
+      font-weight: 500;
     }
 
-    .top-title p {
+    .top p {
       font-size: 13px;
       color: var(--muted);
-      max-width: 520px;
+      max-width: 640px;
+      line-height: 1.5;
     }
 
-    .controls {
+    .filters {
+      margin-top: 6px;
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: flex-end;
     }
 
     .select,
     .search {
-      background: var(--bg-soft);
-      border-radius: 999px;
-      padding: 7px 12px;
       display: flex;
       align-items: center;
       gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--bg-panel);
       border: 1px solid var(--border);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.7);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.85);
       font-size: 11px;
     }
 
@@ -211,195 +190,192 @@
     }
 
     .select select {
-      background: transparent;
       border: none;
-      outline: none;
+      background: transparent;
       color: var(--text);
       font-size: 11px;
+      outline: none;
       cursor: pointer;
     }
 
     .search input {
-      background: none;
       border: none;
       outline: none;
+      background: transparent;
       color: var(--text);
       font-size: 11px;
-      width: 150px;
+      min-width: 160px;
     }
 
-    .tag-label {
+    .tag {
       font-size: 9px;
-      padding: 6px 10px;
+      padding: 6px 11px;
       border-radius: 999px;
+      border: 1px solid rgba(26,159,255,0.4);
       background: var(--accent-soft);
-      color: var(--accent);
+      color: var(--accent-strong);
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      border: 1px solid rgba(25,153,255,0.34);
     }
 
-    /* Featured */
+    /* FEATURED */
 
-    .featured-wrapper {
-      margin-top: 4px;
-      margin-bottom: 14px;
+    .featured {
+      margin-top: 14px;
+      margin-bottom: 10px;
     }
 
-    .featured-banner {
-      position: relative;
-      padding: 16px 16px 14px;
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.98)),
-        radial-gradient(circle at top left, rgba(25,153,255,0.18), transparent),
-        var(--bg-soft-2);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255,255,255,0.05);
-      overflow: hidden;
-      min-height: 86px;
+    .featured-box {
+      padding: 14px 14px 10px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
 
-    .featured-banner.empty {
-      opacity: 0.45;
+    .featured-box.empty {
       border-style: dashed;
-      justify-content: center;
-      align-items: flex-start;
+      color: var(--muted);
+      opacity: 0.85;
     }
 
-    .featured-kicker {
+    .featured-label {
       font-size: 9px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--accent-alt);
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .featured-kicker span.label {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.9);
-      border: 1px solid rgba(102,198,255,0.4);
-      font-size: 8px;
-      color: var(--accent-alt);
+      color: var(--accent-strong);
     }
 
     .featured-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
     }
 
     .featured-sub {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
-      max-width: 560px;
+      line-height: 1.5;
     }
 
     .featured-meta {
       font-size: 9px;
       color: var(--muted);
-      margin-top: 2px;
     }
 
-    /* Updates list */
+    /* LIST HEADER */
 
     .list-header {
+      margin: 16px 2px 8px;
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      align-items: center;
-      margin: 10px 2px 6px;
-    }
-
-    .list-header span {
+      align-items: baseline;
       font-size: 10px;
       color: var(--muted);
     }
 
-    .list-header span strong {
-      color: var(--accent-alt);
+    .list-header strong {
+      color: var(--accent-strong);
+      font-weight: 500;
+      font-size: 11px;
     }
+
+    /* CARDS */
 
     .announcements {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+    }
+
+    .empty-state {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 12px 12px;
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(4,7,12,0.96);
+      margin-top: 4px;
     }
 
     .card {
-      background: var(--bg-soft);
-      border-radius: var(--radius-xl);
-      padding: 10px 12px 8px;
+      padding: 12px 14px 10px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      box-shadow: 0 14px 34px rgba(0,0,0,0.85);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.9);
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 8px;
+      grid-template-columns: 1.7fr 1fr auto;
+      column-gap: 14px;
+      row-gap: 6px;
       align-items: flex-start;
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: all var(--tr-fast);
       position: relative;
-      overflow: hidden;
     }
 
     .card:hover {
       border-color: var(--accent);
+      box-shadow: 0 20px 52px rgba(0,0,0,1);
       transform: translateY(-2px);
-      box-shadow: 0 18px 46px rgba(0,0,0,0.98);
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity var(--transition-mid);
-      pointer-events: none;
-      filter: grayscale(0.2);
+    .card-header-line {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 10px;
+      color: var(--muted);
+      grid-column: 1 / 3;
     }
 
-    .card.has-bg::before {
-      opacity: 0.12;
+    .badge-type {
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(26,159,255,0.5);
     }
 
-    .card-label {
-      font-size: 8px;
+    .badge-game {
+      font-size: 10px;
+      color: var(--accent-strong);
+    }
+
+    .badge-version {
+      font-size: 9px;
       padding: 3px 7px;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent-alt);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      z-index: 1;
-      align-self: flex-start;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--muted);
     }
 
-    .card-main {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      z-index: 1;
+    .badge-date {
+      font-size: 9px;
+      color: var(--muted);
     }
 
     .card-title {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
+      grid-column: 1 / 3;
     }
 
-    .card-sub {
-      font-size: 10px;
-      color: var(--muted);
-      max-width: 650px;
+    .card-short {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+      grid-column: 1 / 3;
     }
 
     .card-tags {
+      grid-column: 1 / 3;
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
@@ -407,89 +383,48 @@
     }
 
     .card-tag {
-      font-size: 8px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.9);
-      border: 1px solid rgba(255,255,255,0.05);
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .card-date {
-      font-size: 8px;
-      color: var(--muted);
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      align-items: flex-end;
-      z-index: 1;
-      min-width: 90px;
-    }
-
-    .card-date span.ver {
+      font-size: 9px;
       padding: 3px 7px;
       border-radius: 999px;
-      border: 1px solid rgba(25,153,255,0.4);
-      color: var(--accent-alt);
-      font-size: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
+      background: rgba(2,4,8,0.98);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--muted);
+    }
+
+    .card-changelog {
+      grid-column: 1 / 4;
+      display: none;
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card-changelog ul {
+      margin-left: 16px;
+      margin-top: 4px;
     }
 
     .card-arrow {
-      position: absolute;
-      right: 12px;
-      top: 8px;
-      font-size: 8px;
-      color: var(--muted);
-      transition: all var(--transition-fast);
-      z-index: 2;
-    }
-
-    .card:hover .card-arrow {
-      color: var(--accent-alt);
-      transform: translateY(-1px);
-    }
-
-    .card-body {
-      display: none;
-      grid-column: 1 / 4;
       font-size: 10px;
       color: var(--muted);
-      padding-top: 6px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      align-self: flex-start;
       margin-top: 2px;
-      line-height: 1.5;
-      z-index: 2;
-      backdrop-filter: blur(2px);
+      transition: transform var(--tr-fast), color var(--tr-fast);
     }
 
-    .card.open .card-body {
+    .card.open .card-changelog {
       display: block;
     }
 
     .card.open .card-arrow {
       transform: rotate(180deg);
-      color: var(--accent-alt);
+      color: var(--accent-strong);
     }
 
-    /* Empty state */
-
-    .empty-state {
-      font-size: 10px;
-      color: var(--muted);
-      padding: 12px 10px;
-      border-radius: var(--radius-md);
-      border: 1px dashed rgba(255,255,255,0.18);
-      background: rgba(3,6,11,0.96);
-      display: none;
-      margin-top: 4px;
-    }
-
-    /* Admin button */
+    /* ADMIN BUTTON */
 
     .admin-btn {
       position: fixed;
@@ -497,18 +432,17 @@
       bottom: 18px;
       padding: 9px 14px;
       border-radius: 999px;
-      background: radial-gradient(circle at 0 0, rgba(102,198,255,0.65), rgba(0,0,0,1));
+      background: radial-gradient(circle at 0 0, rgba(85,198,255,0.9), #05070b);
+      border: 1px solid rgba(85,198,255,0.8);
       color: var(--text);
       font-size: 10px;
-      font-weight: 500;
-      border: 1px solid rgba(102,198,255,0.5);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.95);
       display: flex;
       align-items: center;
       gap: 7px;
       cursor: pointer;
+      box-shadow: 0 18px 52px rgba(0,0,0,1);
       z-index: 80;
-      transition: all var(--transition-fast);
+      transition: all var(--tr-fast);
     }
 
     .admin-btn span.icon {
@@ -517,13 +451,12 @@
 
     .admin-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 22px 60px rgba(0,0,0,1);
-      background: radial-gradient(circle at 0 0, rgba(102,198,255,0.9), rgba(0,0,0,1));
+      box-shadow: 0 26px 70px rgba(0,0,0,1);
     }
 
-    /* Modals (login + panel) */
+    /* MODALS */
 
-    .modal-backdrop {
+    .backdrop {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.78);
@@ -533,53 +466,53 @@
       z-index: 90;
     }
 
-    .modal {
-      background: var(--bg-soft-2);
-      border-radius: 20px;
+    .modal-login {
+      background: var(--bg-panel);
       padding: 16px 16px 12px;
-      box-shadow: 0 26px 80px rgba(0,0,0,0.96);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 26px 80px rgba(0,0,0,1);
       border: 1px solid rgba(255,255,255,0.08);
-      max-width: 420px;
+      max-width: 360px;
       width: 100%;
       font-size: 11px;
     }
 
-    .modal h2 {
+    .modal-login h2 {
       font-size: 15px;
       margin-bottom: 4px;
       font-weight: 500;
     }
 
-    .modal p {
+    .modal-login p {
       font-size: 10px;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .modal label {
+    .modal-login label {
       display: block;
       font-size: 9px;
       color: var(--muted);
       margin-bottom: 3px;
     }
 
-    .modal input[type="password"] {
+    .modal-login input {
       width: 100%;
-      padding: 7px 9px;
+      padding: 7px 8px;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: var(--bg-soft);
+      background: #05070c;
       color: var(--text);
       font-size: 11px;
-      margin-bottom: 8px;
       outline: none;
+      margin-bottom: 6px;
     }
 
     .modal-actions {
       display: flex;
       justify-content: flex-end;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     .btn {
@@ -587,20 +520,20 @@
       border-radius: 999px;
       border: none;
       font-size: 9px;
-      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      transition: all var(--transition-fast);
+      cursor: pointer;
+      transition: all var(--tr-fast);
     }
 
     .btn-primary {
       background: var(--accent);
       color: #020308;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.9);
       font-weight: 600;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.95);
     }
 
     .btn-outline {
@@ -611,159 +544,133 @@
 
     .btn-danger {
       background: transparent;
-      color: var(--danger);
-      border: 1px solid rgba(255,74,106,0.5);
+      color: #ff4a6a;
+      border: 1px solid rgba(255,74,106,0.6);
     }
 
     .btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 32px rgba(0,0,0,0.95);
+      box-shadow: 0 16px 40px rgba(0,0,0,1);
     }
 
-    /* Admin panel */
+    /* ADMIN PANEL */
 
-    .admin-panel {
-      background: #05070c;
-      border-radius: 22px;
-      padding: 14px 14px 10px;
-      border: 1px solid rgba(102,198,255,0.24);
-      box-shadow: 0 26px 90px rgba(0,0,0,1);
+    .modal-admin {
+      background: var(--bg-panel);
+      padding: 14px;
+      border-radius: 20px;
+      box-shadow: 0 30px 88px rgba(0,0,0,1);
+      border: 1px solid rgba(85,198,255,0.32);
       max-width: 980px;
       width: 100%;
       display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1.3fr);
+      grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1.2fr);
       gap: 14px;
       font-size: 10px;
     }
 
-    .admin-header {
+    .admin-headline {
       display: flex;
       justify-content: space-between;
       gap: 6px;
       align-items: baseline;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
-    .admin-header h2 {
+    .admin-headline h2 {
       font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--accent-alt);
+      letter-spacing: 0.12em;
+      color: var(--accent-strong);
+      font-weight: 500;
     }
 
-    .admin-header span.sub {
+    .admin-headline span {
       font-size: 9px;
       color: var(--muted);
     }
 
-    .field-group {
-      display: grid;
-      grid-template-columns: 1.4fr 1.4fr 0.9fr;
-      gap: 6px;
+    .field-block {
       margin-bottom: 6px;
-    }
-
-    .field {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
     }
 
-    .field label {
+    .field-label {
       font-size: 8px;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
 
-    .field input,
-    .field select,
-    .field textarea {
-      padding: 6px 7px;
+    .field-input,
+    .field-select,
+    .field-textarea {
+      width: 100%;
+      padding: 7px 8px;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: var(--bg-soft);
+      background: #05070c;
       color: var(--text);
       font-size: 10px;
       outline: none;
       resize: vertical;
-      min-height: 0;
     }
 
-    .field textarea {
-      min-height: 70px;
-      background: #070b12;
+    .field-textarea {
+      min-height: 60px;
     }
 
-    .field-tags {
-      font-size: 8px;
-      color: var(--muted);
-    }
-
-    .toggle-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin: 4px 0;
-      flex-wrap: wrap;
-    }
-
-    .toggle {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 8px;
-      color: var(--muted);
-      cursor: pointer;
-    }
-
-    .toggle input {
-      margin: 0;
-      cursor: pointer;
+    #fieldChangelog {
+      min-height: 140px; /* больше changelog */
+      line-height: 1.5;
     }
 
     .admin-actions {
-      display: flex;
-      gap: 6px;
       margin-top: 4px;
+      display: flex;
       flex-wrap: wrap;
+      gap: 6px;
     }
 
-    .preview-card {
-      background: var(--bg-soft);
-      border-radius: var(--radius-xl);
-      padding: 9px 10px 7px;
-      border: 1px solid var(--border);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.9);
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 6px;
-      position: relative;
-      overflow: hidden;
-    }
+    /* PREVIEW */
 
     .preview-label {
       font-size: 8px;
       padding: 3px 7px;
       border-radius: 999px;
       background: var(--accent-soft);
-      color: var(--accent-alt);
+      color: var(--accent-strong);
+      display: inline-block;
       text-transform: uppercase;
       letter-spacing: 0.14em;
     }
 
-    .preview-main {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .preview-card {
+      margin-top: 4px;
+      padding: 10px 11px 8px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.9);
+      display: grid;
+      grid-template-columns: 1.7fr 1fr auto;
+      column-gap: 10px;
+      row-gap: 4px;
       font-size: 9px;
-      color: var(--muted);
     }
 
     .preview-title {
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 500;
+      grid-column: 1 / 3;
+    }
+
+    .preview-short {
+      font-size: 10px;
       color: var(--text);
+      grid-column: 1 / 3;
     }
 
     .preview-date {
@@ -776,72 +683,54 @@
       align-items: flex-end;
     }
 
-    .preview-date span.ver {
+    .preview-date span {
       padding: 2px 6px;
       border-radius: 999px;
-      border: 1px solid rgba(25,153,255,0.4);
-      color: var(--accent-alt);
+      border: 1px solid rgba(26,159,255,0.4);
+      color: var(--accent-strong);
       font-size: 7px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
     }
 
-    .preview-bg {
-      position: absolute;
-      inset: 0;
-      opacity: 0.14;
-      background-size: cover;
-      background-position: center;
-      pointer-events: none;
-      filter: grayscale(0.3);
-      z-index: 0;
-    }
-
-    .preview-body {
+    .preview-changelog {
       grid-column: 1 / 4;
-      font-size: 8px;
+      font-size: 9px;
+      color: var(--muted);
       margin-top: 4px;
       padding-top: 4px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      color: var(--muted);
-      position: relative;
-      z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    .json-tip {
+    .admin-note {
+      margin-top: 6px;
       font-size: 8px;
       color: var(--muted);
-      margin-top: 4px;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
-    footer {
-      margin-top: 22px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 8px;
-      color: var(--muted);
-    }
+    /* RESPONSIVE */
 
     @media (max-width: 860px) {
       header {
         flex-direction: column;
         align-items: flex-start;
       }
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .admin-panel {
+      .modal-admin {
         grid-template-columns: 1fr;
         max-height: 92vh;
         overflow-y: auto;
       }
-      .preview-card {
-        grid-template-columns: 1fr;
+      .preview-card,
+      .card {
+        grid-template-columns: 1fr auto;
+      }
+      .card-header-line,
+      .card-title,
+      .card-short,
+      .card-tags,
+      .card-changelog {
+        grid-column: 1 / 3;
       }
     }
   </style>
@@ -851,26 +740,24 @@
   <header>
     <div class="brand">
       <div class="brand-logo">OX</div>
-      <div class="brand-title">
+      <div class="brand-text">
         <span>OXEALL STUDIOS CLNEWS</span>
-        <span>Официальные новости, патч-ноуты и dev-апдейты</span>
+        <span>Официальная лента обновлений игр OXeall</span>
       </div>
     </div>
     <nav>
-      <div class="nav-link active"><span class="dot"></span>Обновления</div>
-      <div class="nav-link">Игры</div>
-      <div class="nav-link">Дорожная карта</div>
-      <div class="nav-link">О студии</div>
-      <div class="nav-link">GitHub / Docs</div>
+      <div class="nav-pill"><span class="dot"></span>Обновления</div>
+      <div class="nav-pill">Только официальный контент</div>
     </nav>
   </header>
 
-  <section class="top-bar">
-    <div class="top-title">
-      <h1>OXeall Studios — Центр обновлений</h1>
-      <p>Все официальные обновления проектов OXeall: патчи, хотфиксы, мейджоры, dev-логи и анонсы. Интерфейс в духе Steam для твоих игр.</p>
-    </div>
-    <div class="controls">
+  <section class="top">
+    <h1>Лента обновлений OXeall Studios</h1>
+    <p>
+      Здесь публикуются официальные патч-ноуты, хотфиксы, крупные обновления, технические объявления и dev-логи
+      по всем проектам OXeall Studios. Структура и подача — в духе Steam News.
+    </p>
+    <div class="filters">
       <div class="select">
         <label for="gameFilter">Игра</label>
         <select id="gameFilter">
@@ -878,58 +765,54 @@
         </select>
       </div>
       <div class="search">
-        <input id="searchInput" type="text" placeholder="Поиск по обновлениям..." />
+        <input type="text" id="searchInput" placeholder="Поиск по заголовкам и изменениям..." />
       </div>
-      <div class="tag-label">Developer verified • OXeall</div>
+      <div class="tag">Developer Verified • OXeall</div>
     </div>
   </section>
 
-  <section class="featured-wrapper">
-    <div class="featured-banner empty" id="featuredBanner">
-      <div class="featured-kicker">
-        Нет закреплённого крупного обновления
-        <span class="label">Создай через Admin Update Panel</span>
-      </div>
+  <section class="featured">
+    <div class="featured-box empty" id="featuredBox">
+      <div class="featured-label">Закреплённое обновление не выбрано</div>
       <div class="featured-sub">
-        Как только ты отметишь обновление как <strong>Featured</strong> в панели разработчика, оно появится здесь как главный баннер (как в Steam).
+        Любое обновление можно сделать <b>Featured</b> через панель разработчика — оно появится здесь
+        как главное официальное объявление.
       </div>
     </div>
   </section>
 
   <div class="list-header">
-    <span><strong>Лента обновлений</strong></span>
-    <span>Нажми по карточке обновления, чтобы увидеть полный changelog.</span>
+    <div><strong>Все обновления</strong></div>
+    <div>Клик по карточке — открыть / скрыть подробный changelog.</div>
   </div>
 
   <div id="emptyState" class="empty-state">
-    Пока нет опубликованных обновлений. Открой <strong>Admin Update Panel</strong> (кнопка справа внизу),
-    создай первое обновление и экспортируй <code>updates.json</code>, чтобы все видели его на сайте.
+    Пока нет опубликованных обновлений. Используй кнопку <b>Admin Update Panel</b> в правом нижнем углу,
+    чтобы добавить первое официальное объявление.
   </div>
 
-  <section class="announcements" id="announcementList"></section>
+  <section id="announcementList" class="announcements"></section>
 
-  <footer>
-    <div>© <span id="year"></span> OXeall Studios. CLNEWS Hub.</div>
-    <div>GitHub Pages • Для глобальных обновлений используй <code>updates.json</code> в репозитории.</div>
+  <footer style="margin-top:22px;font-size:9px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;border-top:1px solid rgba(255,255,255,0.06);padding-top:8px;">
+    <div>© <span id="year"></span> OXeall Studios. CLNEWS.</div>
+    <div>Страница на GitHub Pages. Управление контентом — через Admin Update Panel.</div>
   </footer>
 </div>
 
-<!-- Admin floating button -->
+<!-- Admin button -->
 <button class="admin-btn" id="adminBtn">
   <span class="icon">⚙️</span>
   <span>Admin Update Panel</span>
 </button>
 
 <!-- Login modal -->
-<div class="modal-backdrop" id="loginModal">
-  <div class="modal">
+<div class="backdrop" id="loginBackdrop">
+  <div class="modal-login">
     <h2>Вход в панель разработчика</h2>
-    <p>Эта зона только для OXeall Studios. Введи пароль, чтобы управлять обновлениями.</p>
+    <p>Доступ только для OXeall Studios. Введите пароль для управления лентой обновлений.</p>
     <label for="adminPassword">Пароль</label>
     <input type="password" id="adminPassword" placeholder="Введите пароль" />
-    <div id="loginError" style="display:none;color:#ff4a6a;font-size:8px;margin-top:-4px;margin-bottom:4px;">
-      Неверный пароль.
-    </div>
+    <div id="loginError" style="display:none;color:#ff4a6a;font-size:8px;margin-bottom:4px;">Неверный пароль.</div>
     <div class="modal-actions">
       <button class="btn btn-outline" id="loginCancel">Отмена</button>
       <button class="btn btn-primary" id="loginSubmit">Войти</button>
@@ -938,124 +821,114 @@
 </div>
 
 <!-- Admin panel modal -->
-<div class="modal-backdrop" id="adminPanelModal">
-  <div class="admin-panel">
+<div class="backdrop" id="adminBackdrop">
+  <div class="modal-admin">
+    <!-- LEFT: FORM -->
     <div>
-      <div class="admin-header">
+      <div class="admin-headline">
         <h2>Admin Update Panel</h2>
-        <span class="sub">Создавай и редактируй карточки обновлений в стиле Steam.</span>
+        <span>Создание официальных обновлений в один шаг.</span>
       </div>
 
-      <div class="field-group">
-        <div class="field">
-          <label for="fieldGame">Игра / Проект</label>
-          <input id="fieldGame" type="text" placeholder="Например: CityPort, Neon Arena..." />
-        </div>
-        <div class="field">
-          <label for="fieldType">Тип обновления</label>
-          <select id="fieldType">
+      <div class="field-block">
+        <div class="field-label">Игра / Проект</div>
+        <input id="fieldGame" class="field-input" type="text" placeholder="Например: CityPort, Neon Arena..." />
+      </div>
+
+      <div class="field-block" style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:6px;">
+        <div>
+          <div class="field-label">Тип обновления</div>
+          <select id="fieldType" class="field-select">
             <option value="Major">Major Update</option>
             <option value="Minor">Minor Update</option>
             <option value="Patch">Patch</option>
             <option value="Hotfix">Hotfix</option>
-            <option value="DevLog">DevLog</option>
             <option value="Announcement">Announcement</option>
+            <option value="DevLog">DevLog</option>
           </select>
         </div>
-        <div class="field">
-          <label for="fieldVersion">Версия</label>
-          <input id="fieldVersion" type="text" placeholder="1.0.0, 1.3.6f1..." />
+        <div>
+          <div class="field-label">Версия</div>
+          <input id="fieldVersion" class="field-input" type="text" placeholder="1.0.0 / 1.3.6f1..." />
+        </div>
+        <div>
+          <div class="field-label">Дата</div>
+          <input id="fieldDate" class="field-input" type="date" />
         </div>
       </div>
 
-      <div class="field-group">
-        <div class="field">
-          <label for="fieldTitle">Заголовок</label>
-          <input id="fieldTitle" type="text" placeholder="Краткий и понятный тайтл обновления" />
-        </div>
-        <div class="field">
-          <label for="fieldDate">Дата</label>
-          <input id="fieldDate" type="date" />
-        </div>
-        <div class="field">
-          <label for="fieldBg">Фон (URL)</label>
-          <input id="fieldBg" type="text" placeholder="Опционально: ссылка на фон" />
-        </div>
+      <div class="field-block">
+        <div class="field-label">Заголовок обновления</div>
+        <input id="fieldTitle" class="field-input" type="text" placeholder="Официальный заголовок, как в Steam" />
       </div>
 
-      <div class="field">
-        <label for="fieldShort">Краткое описание</label>
-        <input id="fieldShort" type="text" placeholder="1–2 строки, как в Steam-анонсе." />
+      <div class="field-block">
+        <div class="field-label">Краткое описание (overview)</div>
+        <textarea id="fieldShort" class="field-textarea" placeholder="2–4 строки: что изменилось, для кого, ключевые моменты."></textarea>
       </div>
 
-      <div class="field">
-        <label for="fieldTags">Теги</label>
-        <input id="fieldTags" type="text" placeholder="Через запятую: CityPort, Patch, Balance..." />
-        <div class="field-tags">Используются для поиска, фильтров и визуальных бейджей.</div>
-      </div>
-
-      <div class="field">
-        <label for="fieldChangelog">Полный changelog</label>
-        <textarea id="fieldChangelog" placeholder="- Пункт 1
+      <div class="field-block">
+        <div class="field-label">Полный changelog</div>
+        <textarea id="fieldChangelog" class="field-textarea" placeholder="- Пункт 1
 - Пункт 2
 - Пункт 3"></textarea>
       </div>
 
-      <div class="toggle-row">
-        <label class="toggle">
-          <input type="checkbox" id="fieldFeatured" />
-          Сделать это обновление главным баннером (Featured)
+      <div class="field-block" style="display:grid;grid-template-columns:1.6fr 1.4fr;gap:6px;">
+        <div>
+          <div class="field-label">Фоновое изображение (опционально, URL)</div>
+          <input id="fieldBg" class="field-input" type="text" placeholder="Картинка для карточки / баннера" />
+        </div>
+        <div>
+          <div class="field-label">Теги (через запятую)</div>
+          <input id="fieldTags" class="field-input" type="text" placeholder="CityPort, Patch, Balance..." />
+        </div>
+      </div>
+
+      <div class="field-block" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <label style="font-size:9px;color:var(--muted);display:flex;align-items:center;gap:4px;cursor:pointer;">
+          <input type="checkbox" id="fieldFeatured" style="margin:0;" />
+          Сделать это обновление Featured (верхний баннер)
         </label>
-        <label class="toggle">
-          <input type="checkbox" id="fieldPin" />
-          Поднять в топ списка (закрепить)
+        <label style="font-size:9px;color:var(--muted);display:flex;align-items:center;gap:4px;cursor:pointer;">
+          <input type="checkbox" id="fieldPin" style="margin:0;" />
+          Закрепить вверху списка
         </label>
       </div>
 
       <div class="admin-actions">
-        <button class="btn btn-primary" id="btnAddUpdate">Добавить / Обновить в ленте</button>
+        <button class="btn btn-primary" id="btnAddUpdate">Опубликовать обновление</button>
         <button class="btn btn-outline" id="btnClearForm">Очистить форму</button>
-        <button class="btn btn-danger" id="btnClearLocal">Очистить локальные данные</button>
+        <button class="btn btn-danger" id="btnClearLocal">Сбросить локальные обновления</button>
+        <button class="btn btn-outline" id="btnClosePanel">Закрыть панель</button>
       </div>
 
-      <div class="json-tip">
-        <strong>Как сделать обновления видимыми для всех:</strong><br />
-        1) Создай/отредактируй обновления здесь.<br />
-        2) Нажми «Экспортировать updates.json».<br />
-        3) Закинь файл <code>updates.json</code> в корень репозитория.<br />
-        4) GitHub Pages обновится — и все увидят новые обновления.
+      <div class="admin-note">
+        Обновления сохраняются в этом браузере (localStorage), чтобы тебе было удобно редактировать структуру.
+        Если захочешь, позже можно вынести их в статичный HTML или JSON для всех.
       </div>
     </div>
 
-    <!-- Preview -->
+    <!-- RIGHT: PREVIEW -->
     <div>
-      <div class="admin-header">
-        <h2>Live Preview</h2>
-        <span class="sub">Так будет выглядеть карточка обновления на сайте.</span>
+      <div class="admin-headline">
+        <h2>Предпросмотр</h2>
+        <span>Так игроки увидят объявление на сайте.</span>
       </div>
 
-      <div class="preview-card" id="previewCard">
-        <div class="preview-label" id="previewType">Major Update</div>
-        <div class="preview-main">
+      <div>
+        <div class="preview-label" id="previewType">MAJOR UPDATE</div>
+        <div class="preview-card">
           <div class="preview-title" id="previewTitle">Заголовок обновления</div>
-          <div id="previewShort">Краткое описание обновления появится здесь.</div>
-          <div id="previewTags" style="margin-top:3px;font-size:8px;color:var(--muted);">
-            #Project #Tag
+          <div class="preview-short" id="previewShort">Краткое официальное описание появится здесь.</div>
+          <div class="preview-date">
+            <div id="previewGame">Проект</div>
+            <span id="previewVersion">vX.X.X</span>
+          </div>
+          <div class="preview-changelog" id="previewChangelog">
+            Список изменений (changelog) будет отображён в структурированном виде.
           </div>
         </div>
-        <div class="preview-date">
-          <span id="previewDate">Дата</span>
-          <span class="ver" id="previewVersion">vX.X.X</span>
-        </div>
-        <div class="preview-bg" id="previewBg"></div>
-        <div class="preview-body" id="previewBody">
-          Список изменений (changelog) показывается здесь. Каждый пункт с новой строки будет перенесён в список.
-        </div>
-      </div>
-
-      <div class="admin-actions" style="margin-top:8px;">
-        <button class="btn btn-primary" id="btnExportJson">Экспортировать updates.json</button>
-        <button class="btn btn-outline" id="btnClosePanel">Закрыть панель</button>
       </div>
     </div>
   </div>
@@ -1063,186 +936,88 @@
 
 <script>
   const ADMIN_PASSWORD = "OXS11993384756281";
+  const STORAGE_KEY = "oxeall_clnews_updates_v2";
 
-  const yearEl = document.getElementById("year");
-  yearEl.textContent = new Date().getFullYear();
-
-  const adminBtn = document.getElementById("adminBtn");
-  const loginModal = document.getElementById("loginModal");
-  const adminPanelModal = document.getElementById("adminPanelModal");
-  const loginCancel = document.getElementById("loginCancel");
-  const loginSubmit = document.getElementById("loginSubmit");
-  const adminPasswordInput = document.getElementById("adminPassword");
-  const loginError = document.getElementById("loginError");
+  document.getElementById("year").textContent = new Date().getFullYear();
 
   let isAdmin = false;
   let updates = [];
 
-  /* ---------- Utils ---------- */
+  /* Utils */
 
-  function formatDate(dateStr) {
-    if (!dateStr) return "";
-    const d = new Date(dateStr);
-    if (isNaN(d)) return dateStr;
+  function formatDate(str) {
+    if (!str) return "";
+    const d = new Date(str);
+    if (isNaN(d)) return str;
     const months = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
-    const day = String(d.getDate()).padStart(2,"0");
-    const month = months[d.getMonth()];
-    const year = d.getFullYear();
-    return `${day} ${month} ${year}`;
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${dd} ${months[d.getMonth()]} ${d.getFullYear()}`;
   }
 
-  function typeLabel(type) {
-    switch (type) {
-      case "Major": return "Major Update";
-      case "Minor": return "Minor Update";
-      case "Patch": return "Patch";
-      case "Hotfix": return "Hotfix";
-      case "DevLog": return "Dev Log";
-      case "Announcement": return "Announcement";
-      default: return type || "Update";
+  function typeLabel(t) {
+    switch (t) {
+      case "Major": return "MAJOR UPDATE";
+      case "Minor": return "MINOR UPDATE";
+      case "Patch": return "PATCH";
+      case "Hotfix": return "HOTFIX";
+      case "Announcement": return "ANNOUNCEMENT";
+      case "DevLog": return "DEVLOG";
+      default: return "UPDATE";
     }
-  }
-
-  function genId(update) {
-    const base = (update.game || "update")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-    const ts = Date.now().toString(36);
-    return `${base}-${ts}`;
   }
 
   function changelogToHtml(text) {
     if (!text) return "";
-    const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+    const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
     if (!lines.length) return "";
     if (lines.every(l => l.startsWith("-") || l.startsWith("•"))) {
-      return "<ul>" + lines.map(l =>
-        "<li>" + l.replace(/^(-|\•)\s*/, "") + "</li>"
-      ).join("") + "</ul>";
+      return "<ul>" + lines.map(l => "<li>" + l.replace(/^(-|•)\s*/, "") + "</li>").join("") + "</ul>";
     }
     return text.replace(/\n/g, "<br>");
   }
 
-  function createCard(update) {
-    const card = document.createElement("article");
-    card.className = "card";
-    if (update.background) card.classList.add("has-bg");
-    card.dataset.game = update.game || "";
-    card.dataset.tags = (update.tags || []).join(" ").toLowerCase();
-    card.dataset.title = (update.title || "").toLowerCase();
+  function saveLocal() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updates));
+    } catch (e) {}
+  }
 
-    const labelDiv = document.createElement("div");
-    labelDiv.className = "card-label";
-    labelDiv.textContent = typeLabel(update.type);
-
-    const mainDiv = document.createElement("div");
-    mainDiv.className = "card-main";
-
-    const titleDiv = document.createElement("div");
-    titleDiv.className = "card-title";
-    titleDiv.textContent = update.title || "(Без названия)";
-
-    const subDiv = document.createElement("div");
-    subDiv.className = "card-sub";
-    subDiv.textContent = update.short || "";
-
-    const tagsDiv = document.createElement("div");
-    tagsDiv.className = "card-tags";
-    (update.tags || []).forEach(tag => {
-      const t = document.createElement("span");
-      t.className = "card-tag";
-      t.textContent = tag;
-      tagsDiv.appendChild(t);
-    });
-
-    mainDiv.appendChild(titleDiv);
-    if (update.short) mainDiv.appendChild(subDiv);
-    if ((update.tags || []).length) mainDiv.appendChild(tagsDiv);
-
-    const dateDiv = document.createElement("div");
-    dateDiv.className = "card-date";
-    const dSpan = document.createElement("span");
-    dSpan.textContent = formatDate(update.date);
-    const vSpan = document.createElement("span");
-    vSpan.className = "ver";
-    vSpan.textContent = update.version ? `v${update.version}` : " ";
-    dateDiv.appendChild(dSpan);
-    dateDiv.appendChild(vSpan);
-
-    const arrow = document.createElement("div");
-    arrow.className = "card-arrow";
-    arrow.textContent = "▼";
-
-    const bodyDiv = document.createElement("div");
-    bodyDiv.className = "card-body";
-    bodyDiv.innerHTML = changelogToHtml(update.changelog || "");
-
-    if (update.background) {
-      card.style.setProperty("--bg-card", `url('${update.background}')`);
-      card.querySelector?.(":before");
-      card.style.setProperty("backgroundImage", "none");
-      card.style.setProperty("position", "relative");
-      card.style.setProperty("overflow", "hidden");
-      card.style.setProperty("backdropFilter", "blur(1px)");
-      card.style.setProperty("backgroundColor", "rgba(5,7,12,0.98)");
-      card.style.setProperty("--bg-opacity", "0.12");
-      card.style.background = "rgba(5,7,12,0.98)";
-      card.style.setProperty("background-blend-mode", "overlay");
-      card.style.setProperty("background-size", "cover");
-      card.style.setProperty("background-position", "center");
-      card.style.setProperty("background-image", `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.98)), url('${update.background}')`);
-    }
-
-    card.appendChild(labelDiv);
-    card.appendChild(mainDiv);
-    card.appendChild(dateDiv);
-    card.appendChild(arrow);
-    if (update.changelog) card.appendChild(bodyDiv);
-
-    card.addEventListener("click", (e) => {
-      if (e.target.tagName === "A" || e.target.closest("a")) return;
-      card.classList.toggle("open");
-    });
-
-    return card;
+  function loadLocal() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (Array.isArray(data)) updates = data;
+    } catch (e) {}
   }
 
   function renderFeatured() {
-    const banner = document.getElementById("featuredBanner");
-    const featured = updates.find(u => u.featured);
-    if (!featured) {
-      banner.classList.add("empty");
-      banner.style.backgroundImage = "none";
-      banner.innerHTML = `
-        <div class="featured-kicker">
-          Нет закреплённого крупного обновления
-          <span class="label">Отметь любое как Featured в панели</span>
-        </div>
+    const box = document.getElementById("featuredBox");
+    const feat = updates.find(u => u.featured);
+    if (!feat) {
+      box.classList.add("empty");
+      box.style.backgroundImage = "none";
+      box.innerHTML = `
+        <div class="featured-label">Закреплённое обновление не выбрано</div>
         <div class="featured-sub">
-          Панель разработчика позволяет выбрать главное обновление, которое будет показываться здесь как баннер — как в Steam.
+          Отметь любое обновление как <b>Featured</b> в Admin Update Panel — оно появится здесь как главный баннер.
         </div>`;
       return;
     }
-
-    banner.classList.remove("empty");
-    banner.style.backgroundImage = featured.background
-      ? `linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.98)), url('${featured.background}')`
-      : "linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.98))";
-
-    banner.innerHTML = `
-      <div class="featured-kicker">
-        ${typeLabel(featured.type)} • ${featured.game || "OXeall Project"}
-        <span class="label">Featured</span>
-        <span>${formatDate(featured.date)}</span>
-      </div>
-      <div class="featured-title">${featured.title || ""}</div>
-      <div class="featured-sub">${featured.short || ""}</div>
+    box.classList.remove("empty");
+    box.style.backgroundImage = feat.background
+      ? `linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.98)), url('${feat.background}')`
+      : "none";
+    box.style.backgroundSize = feat.background ? "cover" : "";
+    box.style.backgroundPosition = feat.background ? "center" : "";
+    box.innerHTML = `
+      <div class="featured-label">${typeLabel(feat.type)} • ${feat.game}</div>
+      <div class="featured-title">${feat.title}</div>
+      <div class="featured-sub">${feat.short || ""}</div>
       <div class="featured-meta">
-        Версия: ${featured.version || "—"}
-        ${featured.tags && featured.tags.length ? " • " + featured.tags.join(", ") : ""}
-      </div>
-    `;
+        ${formatDate(feat.date)} · Версия: ${feat.version || "—"}
+        ${feat.tags && feat.tags.length ? " · " + feat.tags.join(", ") : ""}
+      </div>`;
   }
 
   function renderUpdates() {
@@ -1257,7 +1032,8 @@
     }
     empty.style.display = "none";
 
-    updates.sort((a, b) => {
+    // сортировка: pin -> дата (новее выше)
+    updates.sort((a,b) => {
       if (a.pin && !b.pin) return -1;
       if (!a.pin && b.pin) return 1;
       const da = new Date(a.date || 0).getTime();
@@ -1265,8 +1041,80 @@
       return db - da;
     });
 
-    updates.forEach(update => {
-      const card = createCard(update);
+    updates.forEach((u, idx) => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.dataset.game = u.game || "";
+      card.dataset.search = (u.title + " " + (u.short||"") + " " + (u.changelog||"") + " " + (u.tags||[]).join(" ")).toLowerCase();
+
+      const headerLine = document.createElement("div");
+      headerLine.className = "card-header-line";
+
+      const typeSpan = document.createElement("div");
+      typeSpan.className = "badge-type";
+      typeSpan.textContent = typeLabel(u.type);
+
+      const gameSpan = document.createElement("div");
+      gameSpan.className = "badge-game";
+      gameSpan.textContent = u.game || "OXeall Project";
+
+      const verSpan = document.createElement("div");
+      verSpan.className = "badge-version";
+      verSpan.textContent = u.version ? "v" + u.version : "без версии";
+
+      const dateSpan = document.createElement("div");
+      dateSpan.className = "badge-date";
+      dateSpan.textContent = formatDate(u.date);
+
+      headerLine.appendChild(typeSpan);
+      headerLine.appendChild(gameSpan);
+      headerLine.appendChild(verSpan);
+      headerLine.appendChild(dateSpan);
+
+      const titleDiv = document.createElement("div");
+      titleDiv.className = "card-title";
+      titleDiv.textContent = u.title || "Без названия";
+
+      const shortDiv = document.createElement("div");
+      shortDiv.className = "card-short";
+      shortDiv.textContent = u.short || "";
+
+      const tagsDiv = document.createElement("div");
+      tagsDiv.className = "card-tags";
+      (u.tags || []).forEach(t => {
+        const el = document.createElement("div");
+        el.className = "card-tag";
+        el.textContent = t;
+        tagsDiv.appendChild(el);
+      });
+
+      const arrow = document.createElement("div");
+      arrow.className = "card-arrow";
+      arrow.textContent = "▼";
+
+      const changelogDiv = document.createElement("div");
+      changelogDiv.className = "card-changelog";
+      changelogDiv.innerHTML = changelogToHtml(u.changelog || "");
+
+      if (u.background) {
+        card.style.backgroundImage =
+          `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.98)), url('${u.background}')`;
+        card.style.backgroundSize = "cover";
+        card.style.backgroundPosition = "center";
+      }
+
+      card.appendChild(headerLine);
+      card.appendChild(titleDiv);
+      if (u.short) card.appendChild(shortDiv);
+      if (u.tags && u.tags.length) card.appendChild(tagsDiv);
+      card.appendChild(arrow);
+      if (u.changelog) card.appendChild(changelogDiv);
+
+      card.addEventListener("click", (e) => {
+        if (e.target.tagName === "A" || e.target.closest("a")) return;
+        card.classList.toggle("open");
+      });
+
       list.appendChild(card);
     });
 
@@ -1275,172 +1123,129 @@
   }
 
   function attachFilters() {
-    const gameFilter = document.getElementById("gameFilter");
+    const gameSelect = document.getElementById("gameFilter");
     const searchInput = document.getElementById("searchInput");
     const cards = Array.from(document.querySelectorAll(".card"));
 
-    const games = Array.from(new Set(
-      updates.map(u => u.game).filter(Boolean)
-    ));
-    gameFilter.innerHTML = '<option value="all">Все проекты</option>' +
+    // заполнить список игр
+    const games = Array.from(new Set(updates.map(u => u.game).filter(Boolean)));
+    gameSelect.innerHTML = '<option value="all">Все проекты</option>' +
       games.map(g => `<option value="${g}">${g}</option>`).join("");
 
     function apply() {
-      const game = gameFilter.value;
+      const g = gameSelect.value;
       const q = (searchInput.value || "").toLowerCase().trim();
 
-      cards.forEach(card => {
-        const cardGame = card.dataset.game || "";
-        const text = (card.dataset.title + " " + card.dataset.tags + " " + card.innerText).toLowerCase();
-        const matchGame = (game === "all") || (cardGame === game);
-        const matchSearch = !q || text.includes(q);
-        card.style.display = (matchGame && matchSearch) ? "" : "none";
+      cards.forEach(c => {
+        const matchGame = (g === "all") || (c.dataset.game === g);
+        const matchSearch = !q || c.dataset.search.includes(q);
+        c.style.display = (matchGame && matchSearch) ? "" : "none";
       });
     }
 
-    gameFilter.onchange = apply;
+    gameSelect.onchange = apply;
     searchInput.oninput = apply;
     apply();
   }
 
-  /* ---------- Load from updates.json + localStorage ---------- */
+  /* Load initial */
 
-  function loadFromLocal() {
-    try {
-      const raw = localStorage.getItem("oxeall_clnews_updates");
-      if (!raw) return;
-      const data = JSON.parse(raw);
-      if (Array.isArray(data)) {
-        updates = updates.concat(data);
-      }
-    } catch (e) {}
-  }
+  loadLocal();
+  renderUpdates();
 
-  function saveToLocal() {
-    try {
-      localStorage.setItem("oxeall_clnews_updates", JSON.stringify(updates));
-    } catch (e) {}
-  }
+  /* Admin button + login */
 
-  function loadFromJson() {
-    fetch("updates.json", {cache: "no-store"})
-      .then(res => {
-        if (!res.ok) throw new Error("no updates.json");
-        return res.json();
-      })
-      .then(data => {
-        if (Array.isArray(data)) {
-          updates = data;
-        }
-      })
-      .catch(() => {})
-      .finally(() => {
-        loadFromLocal();
-        renderUpdates();
-      });
-  }
-
-  loadFromJson();
-
-  /* ---------- Admin: login & open panel ---------- */
+  const adminBtn = document.getElementById("adminBtn");
+  const loginBackdrop = document.getElementById("loginBackdrop");
+  const adminBackdrop = document.getElementById("adminBackdrop");
+  const loginCancel = document.getElementById("loginCancel");
+  const loginSubmit = document.getElementById("loginSubmit");
+  const loginInput = document.getElementById("adminPassword");
+  const loginError = document.getElementById("loginError");
 
   adminBtn.addEventListener("click", () => {
     if (isAdmin) {
-      adminPanelModal.style.display = "flex";
+      adminBackdrop.style.display = "flex";
       return;
     }
     loginError.style.display = "none";
-    adminPasswordInput.value = "";
-    loginModal.style.display = "flex";
-    adminPasswordInput.focus();
+    loginInput.value = "";
+    loginBackdrop.style.display = "flex";
+    loginInput.focus();
   });
 
   loginCancel.addEventListener("click", () => {
-    loginModal.style.display = "none";
+    loginBackdrop.style.display = "none";
   });
 
   loginSubmit.addEventListener("click", () => {
-    const val = adminPasswordInput.value.trim();
+    const val = loginInput.value.trim();
     if (val === ADMIN_PASSWORD) {
       isAdmin = true;
-      loginModal.style.display = "none";
-      adminPanelModal.style.display = "flex";
+      loginBackdrop.style.display = "none";
+      adminBackdrop.style.display = "flex";
       loginError.style.display = "none";
     } else {
       loginError.style.display = "block";
     }
   });
 
-  adminPasswordInput.addEventListener("keydown", (e) => {
+  loginInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") loginSubmit.click();
   });
 
+  // Закрытие модалок по клику вне
+  loginBackdrop.addEventListener("click", (e) => {
+    if (e.target === loginBackdrop) loginBackdrop.style.display = "none";
+  });
+  adminBackdrop.addEventListener("click", (e) => {
+    if (e.target === adminBackdrop) adminBackdrop.style.display = "none";
+  });
+
   document.getElementById("btnClosePanel").addEventListener("click", () => {
-    adminPanelModal.style.display = "none";
+    adminBackdrop.style.display = "none";
   });
 
-  // Закрытие по клику вне
-  [loginModal, adminPanelModal].forEach(modal => {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-  });
-
-  /* ---------- Admin: form + preview ---------- */
+  /* Admin form + preview */
 
   const fieldGame = document.getElementById("fieldGame");
   const fieldType = document.getElementById("fieldType");
   const fieldVersion = document.getElementById("fieldVersion");
-  const fieldTitle = document.getElementById("fieldTitle");
   const fieldDate = document.getElementById("fieldDate");
-  const fieldBg = document.getElementById("fieldBg");
+  const fieldTitle = document.getElementById("fieldTitle");
   const fieldShort = document.getElementById("fieldShort");
-  const fieldTags = document.getElementById("fieldTags");
   const fieldChangelog = document.getElementById("fieldChangelog");
+  const fieldBg = document.getElementById("fieldBg");
+  const fieldTags = document.getElementById("fieldTags");
   const fieldFeatured = document.getElementById("fieldFeatured");
   const fieldPin = document.getElementById("fieldPin");
 
   const previewType = document.getElementById("previewType");
   const previewTitle = document.getElementById("previewTitle");
   const previewShort = document.getElementById("previewShort");
-  const previewTags = document.getElementById("previewTags");
-  const previewDate = document.getElementById("previewDate");
+  const previewGame = document.getElementById("previewGame");
   const previewVersion = document.getElementById("previewVersion");
-  const previewBg = document.getElementById("previewBg");
-  const previewBody = document.getElementById("previewBody");
+  const previewChangelog = document.getElementById("previewChangelog");
 
   function updatePreview() {
     previewType.textContent = typeLabel(fieldType.value);
     previewTitle.textContent = fieldTitle.value || "Заголовок обновления";
-    previewShort.textContent = fieldShort.value || "Краткое описание обновления появится здесь.";
-    previewDate.textContent = fieldDate.value ? formatDate(fieldDate.value) : "Дата";
-    previewVersion.textContent = fieldVersion.value ? `v${fieldVersion.value}` : "vX.X.X";
-
-    const tags = (fieldTags.value || "")
-      .split(",")
-      .map(t => t.trim())
-      .filter(Boolean);
-    previewTags.textContent = tags.length ? "#" + tags.join(" #") : "#Project #Tag";
-
-    const bg = fieldBg.value.trim();
-    if (bg) {
-      previewBg.style.backgroundImage = `url('${bg}')`;
-      previewBg.style.display = "block";
-    } else {
-      previewBg.style.backgroundImage = "none";
-      previewBg.style.display = "none";
-    }
+    previewShort.textContent = fieldShort.value || "Краткое официальное описание обновления.";
+    previewGame.textContent = fieldGame.value || "Проект";
+    previewVersion.textContent = fieldVersion.value ? "v" + fieldVersion.value : "vX.X.X";
 
     const cl = fieldChangelog.value.trim();
-    previewBody.innerHTML = cl ? changelogToHtml(cl) :
-      "Список изменений (changelog) показывается здесь. Каждый пункт с новой строки будет перенесён в список.";
+    previewChangelog.innerHTML = cl
+      ? changelogToHtml(cl)
+      : "Список изменений (changelog) будет отображён здесь в структурированном виде.";
+
   }
 
-  [fieldGame, fieldType, fieldVersion, fieldTitle, fieldDate, fieldBg,
-   fieldShort, fieldTags, fieldChangelog, fieldFeatured, fieldPin]
-    .forEach(el => el.addEventListener("input", updatePreview));
+  [
+    fieldGame, fieldType, fieldVersion, fieldDate, fieldTitle,
+    fieldShort, fieldChangelog, fieldBg, fieldTags,
+    fieldFeatured, fieldPin
+  ].forEach(el => el.addEventListener("input", updatePreview));
 
   updatePreview();
 
@@ -1448,60 +1253,48 @@
     fieldGame.value = "";
     fieldType.value = "Major";
     fieldVersion.value = "";
-    fieldTitle.value = "";
     fieldDate.value = "";
-    fieldBg.value = "";
+    fieldTitle.value = "";
     fieldShort.value = "";
-    fieldTags.value = "";
     fieldChangelog.value = "";
+    fieldBg.value = "";
+    fieldTags.value = "";
     fieldFeatured.checked = false;
     fieldPin.checked = false;
     updatePreview();
   });
 
   document.getElementById("btnClearLocal").addEventListener("click", () => {
-    if (!confirm("Очистить локальные данные панели? Это не тронет updates.json в репо.")) return;
-    localStorage.removeItem("oxeall_clnews_updates");
-    loadFromJson();
+    if (!confirm("Точно удалить все локально сохранённые обновления?")) return;
+    localStorage.removeItem(STORAGE_KEY);
+    updates = [];
+    renderUpdates();
   });
 
   document.getElementById("btnAddUpdate").addEventListener("click", () => {
-    const update = {
-      id: genId({game: fieldGame.value || "update"}),
-      game: fieldGame.value.trim() || "OXeall Project",
+    const nowISO = new Date().toISOString().slice(0,10);
+    const upd = {
+      game: (fieldGame.value || "OXeall Project").trim(),
       type: fieldType.value,
       version: fieldVersion.value.trim(),
+      date: fieldDate.value || nowISO,
       title: fieldTitle.value.trim() || "Без названия",
-      date: fieldDate.value || new Date().toISOString().slice(0,10),
-      background: fieldBg.value.trim() || "",
       short: fieldShort.value.trim(),
-      tags: (fieldTags.value || "").split(",").map(t => t.trim()).filter(Boolean),
       changelog: fieldChangelog.value.trim(),
+      background: fieldBg.value.trim(),
+      tags: (fieldTags.value || "").split(",").map(t => t.trim()).filter(Boolean),
       featured: fieldFeatured.checked,
       pin: fieldPin.checked
     };
 
-    if (update.featured) {
+    if (upd.featured) {
       updates.forEach(u => u.featured = false);
     }
 
-    updates.unshift(update);
-    saveToLocal();
+    updates.unshift(upd);
+    saveLocal();
     renderUpdates();
-    alert("Обновление добавлено в текущую ленту. Для глобального эффекта — экспортируй updates.json и залей в репозиторий.");
-  });
-
-  document.getElementById("btnExportJson").addEventListener("click", () => {
-    const dataStr = JSON.stringify(updates, null, 2);
-    const blob = new Blob([dataStr], {type: "application/json"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "updates.json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    alert("Обновление добавлено в ленту (сохранено локально в этом браузере).");
   });
 </script>
 </body>
