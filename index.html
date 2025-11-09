@@ -2,29 +2,30 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>OXeall Studios | CLNEWS 999V</title>
+  <title>OXeall Studios | Games Changelog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="OXeall Studios CLNEWS 999V — официальный центр обновлений и патч-ноутов." />
+  <meta name="description" content="OXeall Studios — официальный портал обновлений и патч-ноутов по всем играм студии." />
   <style>
     :root {
       --bg: #02040a;
-      --bg-gradient: radial-gradient(circle at top, rgba(0,180,255,0.16), transparent 60%);
-      --bg-card: #070a12;
-      --bg-card-soft: #0c111b;
+      --bg-gradient: radial-gradient(circle at top, rgba(0,180,255,0.12), transparent 65%);
+      --bg-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='1' stitchTiles='no'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      --bg-card: rgba(6, 10, 18, 0.98);
+      --bg-card-soft: rgba(9, 14, 23, 0.98);
       --bg-panel: #050710;
       --accent: #00aaff;
-      --accent-soft: rgba(0,170,255,0.14);
+      --accent-soft: rgba(0,170,255,0.16);
       --accent-strong: #35c3ff;
       --accent-alt: #00ffc6;
       --text: #f5f7ff;
-      --muted: #a0acc5;
-      --border: #222a38;
+      --muted: #9aa7c5;
+      --border: #1f2836;
       --danger: #ff4a6a;
       --radius-xl: 22px;
       --radius-lg: 18px;
       --radius-md: 12px;
-      --shadow-strong: 0 26px 80px rgba(0,0,0,0.95);
-      --shadow-soft: 0 18px 48px rgba(0,0,0,0.9);
+      --shadow-soft: 0 18px 52px rgba(0,0,0,0.9);
+      --shadow-strong: 0 26px 90px rgba(0,0,0,0.98);
       --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --tr-fast: 0.18s ease-out;
     }
@@ -37,16 +38,26 @@
 
     body {
       font-family: var(--font-main);
-      background: var(--bg-gradient), var(--bg);
+      background:
+        var(--bg-gradient),
+        var(--bg);
       color: var(--text);
       min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--bg-noise);
+      pointer-events: none;
+      z-index: -1;
     }
 
     a {
       color: var(--accent-strong);
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
@@ -67,7 +78,7 @@
       padding: 14px 18px;
       border-radius: var(--radius-xl);
       background:
-        linear-gradient(135deg, rgba(0,170,255,0.18), rgba(3,5,10,0.98));
+        linear-gradient(135deg, rgba(0,170,255,0.16), rgba(2,4,10,0.98));
       border: 1px solid rgba(255,255,255,0.06);
       box-shadow: var(--shadow-soft);
       position: sticky;
@@ -83,18 +94,18 @@
     }
 
     .brand-logo {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 12px;
       background:
-        radial-gradient(circle at 20% 0, #ffffff, #00aaff);
+        radial-gradient(circle at 18% 0, #ffffff, #00aaff);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       font-size: 20px;
       color: #020308;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.98);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.98);
     }
 
     .brand-text {
@@ -127,8 +138,8 @@
     .nav-pill {
       padding: 6px 11px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.7);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.78);
+      border: 1px solid rgba(255,255,255,0.09);
       display: inline-flex;
       gap: 6px;
       align-items: center;
@@ -178,7 +189,7 @@
       gap: 8px;
       padding: 7px 11px;
       border-radius: 999px;
-      background: var(--bg-card);
+      background: var(--bg-card-soft);
       border: 1px solid var(--border);
       box-shadow: 0 12px 30px rgba(0,0,0,0.9);
       font-size: 11px;
@@ -212,7 +223,7 @@
     .tag {
       padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(0,170,255,0.4);
+      border: 1px solid rgba(0,170,255,0.35);
       background: var(--accent-soft);
       color: var(--accent-strong);
       font-size: 9px;
@@ -242,13 +253,14 @@
       border-style: dashed;
       opacity: 0.86;
       color: var(--muted);
+      background: rgba(4,7,14,0.98);
     }
 
     .featured-label {
       font-size: 9px;
       color: var(--accent-strong);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
     }
 
     .featured-title {
@@ -285,7 +297,7 @@
       font-weight: 500;
     }
 
-    /* CARDS */
+    /* FEED / CARDS */
 
     .announcements {
       display: flex;
@@ -298,8 +310,8 @@
       color: var(--muted);
       padding: 12px 13px;
       border-radius: var(--radius-lg);
-      border: 1px dashed rgba(255,255,255,0.2);
-      background: #050811;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(5,8,16,0.98);
       margin-top: 4px;
     }
 
@@ -307,22 +319,38 @@
       padding: 14px 16px 10px;
       border-radius: var(--radius-xl);
       background: var(--bg-card);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(0,170,255,0.13);
       box-shadow: var(--shadow-soft);
       display: grid;
-      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.4fr) auto;
+      grid-template-columns: minmax(0, 2.6fr) minmax(0, 1.4fr) auto;
       column-gap: 14px;
       row-gap: 6px;
       align-items: flex-start;
-      cursor: pointer;
       position: relative;
+      cursor: pointer;
       transition: all var(--tr-fast);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at top left, rgba(0,255,198,0.08), transparent 55%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--tr-fast);
     }
 
     .card:hover {
-      box-shadow: var(--shadow-strong);
       transform: translateY(-2px);
-      border-color: var(--accent);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(0,170,255,0.45);
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card-header {
@@ -335,14 +363,39 @@
     }
 
     .badge-type {
-      padding: 3px 8px;
+      padding: 4px 12px 3px;
       border-radius: 999px;
-      font-size: 9px;
-      background: var(--accent-soft);
-      color: var(--accent-strong);
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      border: 1px solid rgba(0,170,255,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      text-shadow: 0 0 6px rgba(0,0,0,0.9);
+      box-shadow: 0 0 12px rgba(0,0,0,0.9) inset;
+    }
+
+    .badge-type.major {
+      background: radial-gradient(circle at 0 0, #1dd6ff, #0064ff);
+      color: #e9f6ff;
+      box-shadow: 0 0 14px rgba(0,132,255,0.7);
+    }
+
+    .badge-type.minor {
+      background: radial-gradient(circle at 0 0, #ffe07a, #c4a100);
+      color: #1a1300;
+      box-shadow: 0 0 14px rgba(255,224,122,0.5);
+    }
+
+    .badge-type.patch {
+      background: radial-gradient(circle at 0 0, #6dffb5, #00a85a);
+      color: #021008;
+      box-shadow: 0 0 14px rgba(0,200,130,0.5);
+    }
+
+    .badge-type.hotfix {
+      background: radial-gradient(circle at 0 0, #ff8fa3, #ff0033);
+      color: #fff4f4;
+      box-shadow: 0 0 16px rgba(255,0,51,0.8);
     }
 
     .badge-game {
@@ -372,8 +425,8 @@
     .card-short {
       grid-column: 1 / 3;
       font-size: 13px;
+      line-height: 1.7;
       color: var(--text);
-      line-height: 1.6;
     }
 
     .card-tags {
@@ -387,46 +440,10 @@
     .card-tag {
       padding: 3px 7px;
       border-radius: 999px;
-      background: rgba(2,4,9,0.98);
+      background: rgba(4,7,14,1);
       color: var(--muted);
       font-size: 9px;
-      border: 1px solid rgba(255,255,255,0.16);
-    }
-
-    .card-admin-actions {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      display: none;
-      gap: 4px;
-    }
-
-    .card.open .card-admin-actions {
-      top: 8px;
-    }
-
-    .card-edit-btn,
-    .card-del-btn {
-      padding: 3px 7px;
-      border-radius: 999px;
-      font-size: 8px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(0,0,0,0.8);
-      color: var(--muted);
-      cursor: pointer;
-      transition: all var(--tr-fast);
-    }
-
-    .card-edit-btn:hover {
-      color: var(--accent-strong);
-      border-color: var(--accent-strong);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.9);
-    }
-
-    .card-del-btn:hover {
-      color: var(--danger);
-      border-color: var(--danger);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.9);
+      border: 1px solid rgba(255,255,255,0.12);
     }
 
     .card-arrow {
@@ -445,7 +462,7 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       font-size: 12px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .card-changelog h1,
@@ -478,7 +495,7 @@
       bottom: 18px;
       padding: 9px 15px;
       border-radius: 999px;
-      background: radial-gradient(circle at 0 0, rgba(0,255,198,0.8), rgba(0,0,0,1));
+      background: radial-gradient(circle at 0 0, rgba(0,255,198,0.86), rgba(0,0,0,1));
       border: 1px solid rgba(0,255,198,0.7);
       color: var(--text);
       font-size: 10px;
@@ -486,7 +503,7 @@
       align-items: center;
       gap: 7px;
       cursor: pointer;
-      box-shadow: 0 26px 80px rgba(0,0,0,1);
+      box-shadow: 0 26px 90px rgba(0,0,0,1);
       z-index: 80;
       transition: all var(--tr-fast);
     }
@@ -497,15 +514,15 @@
 
     .admin-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 34px 96px rgba(0,0,0,1);
+      box-shadow: 0 34px 110px rgba(0,0,0,1);
     }
 
-    /* BACKDROPS */
+    /* BACKDROP (общий) */
 
     .backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.82);
+      background: rgba(0,0,0,0.86);
       display: none;
       align-items: center;
       justify-content: center;
@@ -601,11 +618,12 @@
       box-shadow: 0 18px 44px rgba(0,0,0,1);
     }
 
-    /* ADMIN PANEL 999V */
+    /* ADMIN PANEL */
 
     .modal-admin {
-      background: radial-gradient(circle at top left, rgba(0,170,255,0.18), transparent),
-                  var(--bg-panel);
+      background:
+        radial-gradient(circle at top left, rgba(0,170,255,0.18), transparent),
+        var(--bg-panel);
       padding: 16px;
       border-radius: 26px;
       border: 1px solid rgba(0,170,255,0.32);
@@ -613,7 +631,7 @@
       max-width: 1180px;
       width: 96%;
       display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.4fr);
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
       gap: 16px;
       font-size: 10px;
     }
@@ -639,17 +657,17 @@
       color: var(--muted);
     }
 
-    .field-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
     .field-block {
       display: flex;
       flex-direction: column;
       gap: 3px;
+      margin-bottom: 6px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
       margin-bottom: 6px;
     }
 
@@ -698,7 +716,6 @@
       transition: all var(--tr-fast);
     }
 
-    .tool-btn.active,
     .tool-btn:hover {
       background: var(--accent-soft);
       color: var(--accent-strong);
@@ -712,15 +729,13 @@
       max-height: 220px;
       overflow-y: auto;
       font-size: 10px;
-      line-height: 1.6;
+      line-height: 1.7;
       color: var(--text);
       outline: none;
       border-radius: 8px;
     }
 
-    #editorChangelog {
-      min-height: 120px;
-    }
+    #editorChangelog { min-height: 120px; }
 
     .toggle-row {
       display: flex;
@@ -750,6 +765,13 @@
       gap: 6px;
     }
 
+    .admin-note {
+      margin-top: 6px;
+      font-size: 8px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
     /* PREVIEW */
 
     .preview-box {
@@ -768,8 +790,6 @@
     .preview-label {
       padding: 3px 8px;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent-strong);
       font-size: 8px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
@@ -816,11 +836,16 @@
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    .admin-note {
-      margin-top: 6px;
-      font-size: 8px;
+    .edit-select {
+      width: 100%;
+      margin-bottom: 4px;
+      padding: 5px 7px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #02040a;
       color: var(--muted);
-      line-height: 1.5;
+      font-size: 9px;
+      outline: none;
     }
 
     @media (max-width: 900px) {
@@ -843,7 +868,6 @@
       .card-short,
       .card-tags,
       .card-changelog,
-      .preview-label,
       .preview-title,
       .preview-short,
       .preview-changelog {
@@ -858,21 +882,21 @@
     <div class="brand">
       <div class="brand-logo">OX</div>
       <div class="brand-text">
-        <span>OXEALL STUDIOS CLNEWS 999V</span>
-        <span>Официальный центр обновлений и патч-ноутов</span>
+        <span>OXEall Studios — Games Changelog</span>
+        <span>Официальная лента обновлений по всем проектам студии</span>
       </div>
     </div>
     <nav>
-      <div class="nav-pill"><span class="dot"></span>Updates Feed</div>
-      <div class="nav-pill">Steam-inspired • Own Design</div>
+      <div class="nav-pill"><span class="dot"></span>Official Updates Feed</div>
+      <div class="nav-pill">Steam-inspired • OXeall Design</div>
     </nav>
   </header>
 
   <section class="top">
     <h1>Лента обновлений OXeall Studios</h1>
     <p>
-      Все ключевые обновления, багфиксы, хотфиксы, крупные релизы и технические объявления по проектам OXeall
-      собраны в одном месте. Структура понятная, без лишнего шума.
+      Здесь публикуются все официальные патч-ноуты, хотфиксы, major/minor апдейты и технические объявления
+      по играм OXeall Studios. Никакого мусора — только понятные и оформленные записи.
     </p>
     <div class="filters">
       <div class="select">
@@ -882,7 +906,7 @@
         </select>
       </div>
       <div class="search">
-        <input type="text" id="searchInput" placeholder="Поиск по заголовкам и изменениям..." />
+        <input type="text" id="searchInput" placeholder="Поиск по заголовкам, играм и изменениям..." />
       </div>
       <div class="tag">Developer Verified • OXeall</div>
     </div>
@@ -892,41 +916,40 @@
     <div class="featured-box empty" id="featuredBox">
       <div class="featured-label">Featured обновление не выбрано</div>
       <div class="featured-sub">
-        Отметь любое обновление как <b>Featured</b> в панели разработчика — оно закрепится здесь
-        как главный официальный анонс.
+        Отметь любое обновление как <b>Featured</b> в панели разработчика — оно появится здесь как главный официальный анонс.
       </div>
     </div>
   </section>
 
   <div class="list-header">
     <div><strong>Все обновления</strong></div>
-    <div>Клик по карточке — открыть подробный changelog. Админ может редактировать в один клик.</div>
+    <div>Нажми на карточку, чтобы раскрыть подробный changelog.</div>
   </div>
 
   <div id="emptyState" class="empty-state">
-    Ещё нет опубликованных обновлений. Открой <b>Admin Update Panel</b> снизу справа, создай первое объявление —
-    оно сразу появится здесь.
+    Пока нет опубликованных обновлений. Открой панель разработчика справа снизу,
+    создай первое обновление — оно сразу появится в этой ленте.
   </div>
 
   <section id="announcementList" class="announcements"></section>
 
   <footer style="margin-top:22px;font-size:9px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;border-top:1px solid rgba(255,255,255,0.06);padding-top:8px;">
-    <div>© <span id="year"></span> OXeall Studios. CLNEWS 999V.</div>
-    <div>Управление контентом — локальная Admin Update Panel. Публикуй только то, что считаешь официальным.</div>
+    <div>© <span id="year"></span> OXeall Studios. Games Changelog.</div>
+    <div>Контент управляется через встроенную Admin Update Panel (локальное хранение).</div>
   </footer>
 </div>
 
-<!-- Admin floating button -->
+<!-- Admin button -->
 <button class="admin-btn" id="adminBtn">
   <span class="icon">⚙️</span>
-  <span>Admin Update Panel</span>
+  <span>Developer Panel</span>
 </button>
 
 <!-- Login modal -->
 <div class="backdrop" id="loginBackdrop">
   <div class="modal-login">
-    <h2>Вход в панель разработчика</h2>
-    <p>Пароль только для OXeall Studios. Используется для локального управления лентой.</p>
+    <h2>Вход для разработчика</h2>
+    <p>Панель управления обновлениями доступна только OXeall Studios.</p>
     <label for="adminPassword">Пароль</label>
     <input type="password" id="adminPassword" placeholder="Введите пароль" />
     <div id="loginError" style="display:none;color:var(--danger);font-size:8px;margin-bottom:4px;">Неверный пароль.</div>
@@ -940,12 +963,17 @@
 <!-- Admin panel -->
 <div class="backdrop" id="adminBackdrop">
   <div class="modal-admin">
-    <!-- LEFT: FORM + EDITORS -->
+    <!-- LEFT: FORM -->
     <div>
       <div class="admin-header">
         <h2>Admin Update Panel</h2>
-        <span>Создание и редактирование обновлений в стиле 999V.</span>
+        <span>Создавай и редактируй официальные записи в пару кликов.</span>
       </div>
+
+      <!-- Select existing update -->
+      <select id="editSelect" class="edit-select">
+        <option value="">Новый пост / выбрать для редактирования...</option>
+      </select>
 
       <div class="field-block">
         <div class="field-label">Игра / Проект</div>
@@ -958,10 +986,8 @@
           <select id="fieldType" class="field-select">
             <option value="Major">Major Update</option>
             <option value="Minor">Minor Update</option>
-            <option value="Patch">Patch</option>
+            <option value="Patch">Patch Update</option>
             <option value="Hotfix">Hotfix</option>
-            <option value="Announcement">Announcement</option>
-            <option value="DevLog">DevLog</option>
           </select>
         </div>
         <div class="field-block">
@@ -976,7 +1002,7 @@
 
       <div class="field-block">
         <div class="field-label">Заголовок обновления</div>
-        <input id="fieldTitle" class="field-input" type="text" placeholder="Крупный официальный заголовок, как в Steam News" />
+        <input id="fieldTitle" class="field-input" type="text" placeholder="Крупный официальный заголовок" />
       </div>
 
       <!-- Overview editor -->
@@ -986,11 +1012,10 @@
           <div class="editor-toolbar">
             <button type="button" class="tool-btn" data-cmd="bold">B</button>
             <button type="button" class="tool-btn" data-cmd="italic">I</button>
-            <button type="button" class="tool-btn" data-cmd="formatBlock" data-value="h3">H3</button>
             <button type="button" class="tool-btn" data-cmd="insertUnorderedList">• List</button>
           </div>
           <div id="editorOverview" class="editor-area" contenteditable="true">
-Кратко опиши ключевые изменения, чтобы игрок за 1–2 строки понял суть.</div>
+Кратко опиши ключевые изменения в 1–3 строках. Это увидят все сразу.</div>
         </div>
       </div>
 
@@ -1001,47 +1026,46 @@
           <div class="editor-toolbar">
             <button type="button" class="tool-btn" data-cmd="bold">B</button>
             <button type="button" class="tool-btn" data-cmd="italic">I</button>
-            <button type="button" class="tool-btn" data-cmd="formatBlock" data-value="h3">H3</button>
             <button type="button" class="tool-btn" data-cmd="insertUnorderedList">• List</button>
             <button type="button" class="tool-btn" data-cmd="insertOrderedList">1. List</button>
           </div>
           <div id="editorChangelog" class="editor-area" contenteditable="true">
 - Добавь пункты изменений
-- Используй списки, заголовки и форматирование
-- Стиль как у официальных патч-ноутов</div>
+- Используй списки и подзаголовки для важных блоков
+- Игрок должен быстро понять, что изменилось</div>
         </div>
       </div>
 
       <div class="field-row">
         <div class="field-block">
-          <div class="field-label">Фон (URL, опционально)</div>
-          <input id="fieldBg" class="field-input" type="text" placeholder="Картинка баннера / карточки" />
+          <div class="field-label">Фон карточки (URL, опционально)</div>
+          <input id="fieldBg" class="field-input" type="text" placeholder="Ссылка на изображение (из репо или CDN)" />
         </div>
         <div class="field-block">
           <div class="field-label">Теги (через запятую)</div>
-          <input id="fieldTags" class="field-input" type="text" placeholder="CityPort, Patch, Balance..." />
+          <input id="fieldTags" class="field-input" type="text" placeholder="Название игры, тип, режим..." />
         </div>
         <div class="field-block">
-          <div class="field-label">ID (для редактирования)</div>
-          <input id="fieldId" class="field-input" type="text" placeholder="Генерируется автоматически" disabled />
+          <div class="field-label">ID поста</div>
+          <input id="fieldId" class="field-input" type="text" disabled placeholder="Генерируется автоматически" />
         </div>
       </div>
 
       <div class="toggle-row">
-        <label><input type="checkbox" id="fieldFeatured" /> Сделать Featured (главный баннер)</label>
+        <label><input type="checkbox" id="fieldFeatured" /> Сделать Featured (верхний баннер)</label>
         <label><input type="checkbox" id="fieldPin" /> Закрепить вверху ленты</label>
       </div>
 
       <div class="admin-actions">
         <button class="btn btn-primary" id="btnSaveUpdate">Сохранить / Обновить</button>
         <button class="btn btn-outline" id="btnNew">Новый пост</button>
-        <button class="btn btn-danger" id="btnClearLocal">Сбросить локальные посты</button>
+        <button class="btn btn-danger" id="btnClearLocal">Сбросить все локальные посты</button>
         <button class="btn btn-outline" id="btnClosePanel">Закрыть панель</button>
       </div>
 
       <div class="admin-note">
-        Все изменения сохраняются в <b>localStorage</b> этого браузера. Редактируй посты в панели или по кнопке
-        «Edit» на карточке. Если захочешь сделать глобально для всех — перенеси сгенерированные данные в статический код.
+        Все данные хранятся в <b>localStorage</b> этого браузера (без сервера).
+        Для глобальной публикации можно перенести сгенерированный контент напрямую в HTML репозитория.
       </div>
     </div>
 
@@ -1049,20 +1073,20 @@
     <div>
       <div class="admin-header">
         <h2>Live Preview</h2>
-        <span>Карточка как в реальной ленте CLNEWS 999V.</span>
+        <span>Так будет выглядеть обновление в ленте.</span>
       </div>
       <div class="preview-box">
         <div class="preview-label" id="previewType">MAJOR UPDATE</div>
         <div class="preview-title" id="previewTitle">Заголовок обновления</div>
         <div class="preview-short" id="previewShort">
-          Краткое официальное описание обновления будет отображаться здесь более крупным текстом.
+          Краткое официальное описание обновления будет отображаться здесь.
         </div>
         <div class="preview-date">
           <div id="previewGame">OXeall Project</div>
           <span id="previewVersion">vX.X.X</span>
         </div>
         <div class="preview-changelog" id="previewChangelog">
-          Полный changelog в формате списков и заголовков появится здесь.
+          Полный changelog будет показан в разворачиваемой области карточки.
         </div>
       </div>
     </div>
@@ -1071,15 +1095,15 @@
 
 <script>
   const ADMIN_PASSWORD = "OXS11993384756281";
-  const STORAGE_KEY = "oxeall_clnews_999v_updates";
+  const STORAGE_KEY = "oxeall_games_changelog_updates_v1";
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
   let isAdmin = false;
   let updates = [];
-  let editingId = null; // если редактируем существующий пост
+  let editingId = null;
 
-  /* ---------- Utils ---------- */
+  /* Utils */
 
   function formatDate(str) {
     if (!str) return "";
@@ -1093,11 +1117,19 @@
     switch (t) {
       case "Major": return "MAJOR UPDATE";
       case "Minor": return "MINOR UPDATE";
-      case "Patch": return "PATCH";
+      case "Patch": return "PATCH UPDATE";
       case "Hotfix": return "HOTFIX";
-      case "Announcement": return "ANNOUNCEMENT";
-      case "DevLog": return "DEVLOG";
       default: return "UPDATE";
+    }
+  }
+
+  function typeClass(t) {
+    switch (t) {
+      case "Major": return "major";
+      case "Minor": return "minor";
+      case "Patch": return "patch";
+      case "Hotfix": return "hotfix";
+      default: return "";
     }
   }
 
@@ -1107,6 +1139,7 @@
 
   function saveLocal() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updates)); } catch(e){}
+    rebuildEditSelect();
   }
 
   function loadLocal() {
@@ -1118,7 +1151,7 @@
     } catch(e){}
   }
 
-  /* ---------- Render ---------- */
+  /* Rendering */
 
   function renderFeatured() {
     const box = document.getElementById("featuredBox");
@@ -1129,14 +1162,14 @@
       box.innerHTML = `
         <div class="featured-label">Featured обновление не выбрано</div>
         <div class="featured-sub">
-          Отметь любое обновление как <b>Featured</b> в панели — оно закрепится здесь как главный анонс.
+          Отметь любое обновление как <b>Featured</b> в панели — оно появится здесь как главный анонс.
         </div>`;
       return;
     }
     box.classList.remove("empty");
     if (feat.background) {
       box.style.backgroundImage =
-        `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.98)), url('${feat.background}')`;
+        \`linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.98)), url('\${feat.background}')\`;
       box.style.backgroundSize = "cover";
       box.style.backgroundPosition = "center";
     } else {
@@ -1164,11 +1197,10 @@
     }
     empty.style.display = "none";
 
-    // sort: pinned first, then by date desc
     updates.sort((a,b) => {
       if (a.pin && !b.pin) return -1;
       if (!a.pin && b.pin) return 1;
-      return (new Date(b.date||0)) - (new Date(a.date||0));
+      return (new Date(b.date || 0)) - (new Date(a.date || 0));
     });
 
     updates.forEach(u => {
@@ -1178,6 +1210,7 @@
       card.dataset.game = u.game || "";
       card.dataset.search = (
         (u.title||"") + " " +
+        (u.game||"") + " " +
         (u.overview||"") + " " +
         (u.changelog||"") + " " +
         (u.tags||[]).join(" ")
@@ -1185,7 +1218,7 @@
 
       if (u.background) {
         card.style.backgroundImage =
-          `linear-gradient(to bottom, rgba(0,0,0,0.70), rgba(0,0,0,0.98)), url('${u.background}')`;
+          \`linear-gradient(to bottom, rgba(0,0,0,0.74), rgba(0,0,0,0.98)), url('\${u.background}')\`;
         card.style.backgroundSize = "cover";
         card.style.backgroundPosition = "center";
       }
@@ -1193,9 +1226,9 @@
       const header = document.createElement("div");
       header.className = "card-header";
       header.innerHTML = `
-        <div class="badge-type">${typeLabel(u.type)}</div>
+        <div class="badge-type ${typeClass(u.type)}">${typeLabel(u.type)}</div>
         <div class="badge-game">${u.game || "OXeall Project"}</div>
-        <div class="badge-version">${u.version ? "v"+u.version : "Без версии"}</div>
+        <div class="badge-version">${u.version ? "v" + u.version : "Без версии"}</div>
         <div class="badge-date">${formatDate(u.date)}</div>
       `;
 
@@ -1224,15 +1257,7 @@
       changelog.className = "card-changelog";
       changelog.innerHTML = u.changelog || "";
 
-      const adminActions = document.createElement("div");
-      adminActions.className = "card-admin-actions";
-      adminActions.innerHTML = `
-        <button class="card-edit-btn">Edit</button>
-        <button class="card-del-btn">Del</button>
-      `;
-      card.appendChild(adminActions);
-
-      if (u.overview) card.appendChild(header); else card.appendChild(header);
+      card.appendChild(header);
       card.appendChild(title);
       if (u.overview) card.appendChild(short);
       if (u.tags && u.tags.length) card.appendChild(tagsDiv);
@@ -1240,25 +1265,9 @@
       if (u.changelog) card.appendChild(changelog);
 
       card.addEventListener("click", e => {
-        if (e.target.closest(".card-edit-btn") || e.target.closest(".card-del-btn")) return;
         if (e.target.tagName === "A" || e.target.closest("a")) return;
         card.classList.toggle("open");
       });
-
-      if (isAdmin) {
-        adminActions.style.display = "flex";
-        adminActions.querySelector(".card-edit-btn").addEventListener("click", (e) => {
-          e.stopPropagation();
-          loadUpdateToForm(u.id);
-        });
-        adminActions.querySelector(".card-del-btn").addEventListener("click", (e) => {
-          e.stopPropagation();
-          if (!confirm("Удалить это обновление из локального списка?")) return;
-          updates = updates.filter(x => x.id !== u.id);
-          saveLocal();
-          renderUpdates();
-        });
-      }
 
       list.appendChild(card);
     });
@@ -1266,6 +1275,8 @@
     renderFeatured();
     attachFilters();
   }
+
+  /* Filters */
 
   function attachFilters() {
     const select = document.getElementById("gameFilter");
@@ -1291,7 +1302,7 @@
     apply();
   }
 
-  /* ---------- Admin: login ---------- */
+  /* Admin login */
 
   const adminBtn = document.getElementById("adminBtn");
   const loginBackdrop = document.getElementById("loginBackdrop");
@@ -1319,7 +1330,6 @@
       isAdmin = true;
       loginBackdrop.style.display = "none";
       adminBackdrop.style.display = "flex";
-      renderUpdates(); // чтобы показать edit-кнопки
     } else {
       loginError.style.display = "block";
     }
@@ -1341,30 +1351,26 @@
     adminBackdrop.style.display = "none";
   });
 
-  /* ---------- Admin: editors ---------- */
-
-  let activeEditor = null;
+  /* Editor toolbars */
 
   function bindEditorToolbar(wrapper) {
     const area = wrapper.querySelector(".editor-area");
     const buttons = wrapper.querySelectorAll(".tool-btn");
-    area.addEventListener("focus", () => { activeEditor = area; });
-    area.addEventListener("click", () => { activeEditor = area; });
+    area.addEventListener("focus", () => { document.execCommand("styleWithCSS", false, true); });
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
-        if (!activeEditor) activeEditor = area;
-        activeEditor.focus();
+        area.focus();
         const cmd = btn.dataset.cmd;
-        const val = btn.dataset.value || null;
-        document.execCommand(cmd, false, val);
+        document.execCommand(cmd, false, null);
       });
     });
   }
 
   document.querySelectorAll(".editor-wrap").forEach(bindEditorToolbar);
 
-  /* ---------- Admin: form & preview ---------- */
+  /* Admin form & preview */
 
+  const editSelect = document.getElementById("editSelect");
   const fieldGame = document.getElementById("fieldGame");
   const fieldType = document.getElementById("fieldType");
   const fieldVersion = document.getElementById("fieldVersion");
@@ -1387,25 +1393,25 @@
 
   function updatePreview() {
     previewType.textContent = typeLabel(fieldType.value);
+    previewType.className = "preview-label " + typeClass(fieldType.value);
     previewTitle.textContent = fieldTitle.value || "Заголовок обновления";
-    previewShort.innerHTML = editorOverview.innerHTML || "Краткое официальное описание обновления.";
+    previewShort.innerHTML = editorOverview.innerHTML || "Краткое итоговое описание обновления.";
     previewGame.textContent = fieldGame.value || "OXeall Project";
-    previewVersion.textContent = fieldVersion.value ? "v"+fieldVersion.value : "vX.X.X";
-    previewChangelog.innerHTML = editorChangelog.innerHTML || "Changelog будет отображён здесь.";
+    previewVersion.textContent = fieldVersion.value ? "v" + fieldVersion.value : "vX.X.X";
+    previewChangelog.innerHTML = editorChangelog.innerHTML || "Changelog будет показан в раскрываемой части карточки.";
   }
 
   [
-    fieldGame, fieldType, fieldVersion, fieldDate, fieldTitle,
-    fieldBg, fieldTags, fieldFeatured, fieldPin
+    fieldGame, fieldType, fieldVersion, fieldDate,
+    fieldTitle, fieldBg, fieldTags,
+    fieldFeatured, fieldPin
   ].forEach(el => el.addEventListener("input", updatePreview));
-
   editorOverview.addEventListener("input", updatePreview);
   editorChangelog.addEventListener("input", updatePreview);
 
-  updatePreview();
-
   function resetForm() {
     editingId = null;
+    editSelect.value = "";
     fieldGame.value = "";
     fieldType.value = "Major";
     fieldVersion.value = "";
@@ -1416,8 +1422,8 @@
     fieldFeatured.checked = false;
     fieldPin.checked = false;
     fieldId.value = "";
-    editorOverview.innerHTML = "Кратко опиши ключевые изменения, чтобы игрок за 1–2 строки понял суть.";
-    editorChangelog.innerHTML = "- Добавь пункты изменений<br>- Используй списки, заголовки и форматирование<br>- Стиль как у официальных патч-ноутов";
+    editorOverview.innerHTML = "Кратко опиши ключевые изменения в 1–3 строках. Это увидят все сразу.";
+    editorChangelog.innerHTML = "- Добавь пункты изменений<br>- Используй списки и подзаголовки для важных блоков<br>- Игрок должен быстро понять, что изменилось";
     updatePreview();
   }
 
@@ -1456,19 +1462,26 @@
     }
 
     const idx = updates.findIndex(u => u.id === id);
-    if (idx >= 0) {
-      updates[idx] = upd;
-    } else {
-      updates.unshift(upd);
-    }
+    if (idx >= 0) updates[idx] = upd;
+    else updates.unshift(upd);
 
     editingId = id;
     fieldId.value = id;
 
     saveLocal();
     renderUpdates();
-    alert("Обновление сохранено локально и отображено в ленте.");
+    alert("Обновление сохранено локально и отображается в ленте.");
   });
+
+  function rebuildEditSelect() {
+    editSelect.innerHTML = '<option value="">Новый пост / выбрать для редактирования...</option>';
+    updates.forEach(u => {
+      const opt = document.createElement("option");
+      opt.value = u.id;
+      opt.textContent = `${u.game || "Project"} — ${u.title || "Без названия"} (${typeLabel(u.type)})`;
+      editSelect.appendChild(opt);
+    });
+  }
 
   function loadUpdateToForm(id) {
     const upd = updates.find(u => u.id === id);
@@ -1487,13 +1500,23 @@
     fieldFeatured.checked = !!upd.featured;
     fieldPin.checked = !!upd.pin;
     updatePreview();
-    adminBackdrop.style.display = "flex";
   }
 
-  /* ---------- Init ---------- */
+  editSelect.addEventListener("change", () => {
+    const id = editSelect.value;
+    if (!id) {
+      resetForm();
+    } else {
+      loadUpdateToForm(id);
+    }
+  });
+
+  /* Init */
 
   loadLocal();
+  rebuildEditSelect();
   renderUpdates();
+  updatePreview();
 </script>
 </body>
 </html>
