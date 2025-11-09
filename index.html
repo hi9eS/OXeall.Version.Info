@@ -1,269 +1,1508 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OXeall Studios Games</title>
+  <title>OXeall Studios | CLNEWS — Official Updates Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Официальный хаб новостей и обновлений игр OXeall Studios." />
   <style>
-    :root{
-      --bg:#05070b;--panel:#0a0f16;--panel2:#0d1420;--line:#162235;
-      --text:#e8f7ff;--muted:#9fb8c6;--accent:#00d5ff;--accent-soft:rgba(0,213,255,.18);
-      --radius:14px;--shadow:0 12px 36px rgba(0,0,0,.35)
+    :root {
+      --bg: #05070c;
+      --bg-soft: #0b1017;
+      --bg-soft-2: #141a24;
+      --accent: #1999ff;
+      --accent-soft: rgba(25,153,255,0.16);
+      --accent-alt: #66c6ff;
+      --text: #f5f7fa;
+      --muted: #9ea7b5;
+      --border: #202735;
+      --danger: #ff4a6a;
+      --radius-xl: 22px;
+      --radius-md: 12px;
+      --transition-fast: 0.18s ease-out;
+      --transition-mid: 0.26s ease-out;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.6);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{background:radial-gradient(90vw 80vh at 70% -20%,#0b1822 0%,#070a10 55%,#05070b 100%);color:var(--text);font-family:system-ui,Segoe UI,Roboto,Inter,sans-serif;overflow-x:hidden}
 
-    /* header */
-    header{position:sticky;top:0;z-index:10;background:rgba(5,7,11,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-    nav{max-width:1200px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
-    .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:800;letter-spacing:.2px}
-    .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-    .tabs{display:flex;gap:10px;align-items:center}
-    .tab{border:1px solid var(--line);background:#0a0f16;border-radius:999px;padding:8px 16px;color:var(--text);cursor:pointer;transition:.22s}
-    .tab:hover{border-color:var(--accent)}
-    .tab.active{background:#0f1826;border-color:#1a2a40}
-    .search-btn{height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#0a0f16;color:var(--text);font-weight:600;cursor:pointer;transition:.25s}
-    .search-btn:hover{border-color:var(--accent)}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    /* content wrapper fade */
-    #content{transition:opacity .25s ease}
-    #content.fading{opacity:.85}
+    body {
+      font-family: var(--font-main);
+      background:
+        radial-gradient(circle at top, rgba(35,71,122,0.18), transparent 55%),
+        radial-gradient(circle at top left, rgba(25,153,255,0.04), transparent 55%),
+        #020308;
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-    main{max-width:1200px;margin:36px auto;padding:0 20px}
-    .section-title{font-size:26px;margin-bottom:6px}
-    .section-sub{color:var(--muted);margin-bottom:18px}
+    a {
+      color: var(--accent-alt);
+      text-decoration: none;
+    }
 
-    /* grid */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
-    .card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;position:relative;transition:transform .25s ease,box-shadow .25s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,213,255,.12)}
-    .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0a1218}
-    .badge{position:absolute;top:10px;left:10px;padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px;pointer-events:none}
-    .badge.soon{background:rgba(0,213,255,.14);border:1px solid var(--accent);color:var(--accent)}
-    .badge.year{background:rgba(255,157,0,.12);border:1px solid #ff9d00;color:#ffb24a}
-    .card__body{padding:16px;display:flex;flex-direction:column;gap:12px}
-    .title{font-size:18px;font-weight:700}
-    .play-container{display:flex;align-items:center;gap:8px}
-    .btn-play{flex:1;text-align:center;border:1px solid var(--line);background:#0b121b;color:var(--text);padding:12px 0;border-radius:10px;cursor:pointer;transition:.22s;font-weight:700;text-decoration:none}
-    .btn-play:hover{background:#0f1a26}
-    .copy-btn{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:#0b121b;border-radius:10px;cursor:pointer;transition:.22s}
-    .copy-btn svg{width:20px;height:20px;fill:var(--text);transition:.22s}
-    .copy-btn:hover{border-color:var(--accent)}
-    .copy-btn:hover svg{fill:var(--accent)}
+    a:hover {
+      text-decoration: underline;
+    }
 
-    /* search slide */
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .35s ease;z-index:998}
-    .overlay.active{opacity:1;pointer-events:auto}
-    .search-slide{position:fixed;top:20px;right:-360px;width:300px;border-radius:16px 0 0 16px;background:rgba(13,20,32,.9);box-shadow:-8px 0 25px rgba(0,0,0,.45);transition:right .45s ease;z-index:999;display:flex;flex-direction:column;padding:40px 20px;backdrop-filter:blur(10px)}
-    .search-slide.active{right:20px}
-    .search-slide input{width:100%;padding:12px;border:none;border-radius:10px;background:#0a121b;color:var(--text);outline:none;box-shadow:inset 0 0 0 1px var(--line)}
-    .search-slide .close-btn{position:absolute;top:10px;right:15px;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer}
+    .page {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 22px 16px 40px;
+    }
 
-    /* toast */
-    .toast{position:fixed;bottom:28px;right:28px;background:#0a0f16;border:1px solid var(--line);padding:14px 20px;border-radius:12px;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.45);opacity:0;transform:translateY(16px);transition:opacity .35s,transform .35s;z-index:9999;font-weight:650;letter-spacing:.2px}
-    .toast.show{opacity:1;transform:translateY(0)}
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(25,153,255,0.16), rgba(0,0,0,0.98));
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 10px;
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.05);
+      z-index: 30;
+    }
 
-    /* footer */
-    .footer{margin:44px 0 26px;text-align:center;font-size:13px;color:#8aa0b5;opacity:.9;padding-top:22px;border-top:1px solid var(--line)}
-    .footer strong{color:#bfefff}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-    /* modal */
-    .modal{position:fixed;inset:0;display:none;place-items:center;z-index:1000}
-    .modal.active{display:grid}
-    .modal .back{position:absolute;inset:0;background:rgba(0,0,0,.5)}
-    .modal .box{position:relative;background:#0d1420;border:1px solid var(--line);border-radius:16px;padding:22px 22px;max-width:520px;width:92%;box-shadow:0 20px 60px rgba(0,0,0,.55)}
-    .modal .closeX{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#0b1320;color:#e6f7ff;font-size:18px;cursor:pointer}
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 25% 0, #ffffff, #1999ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #020308;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.9);
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title span:first-child {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-alt);
+    }
+
+    .brand-title span:last-child {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .nav-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      display: none;
+    }
+
+    .nav-link.active {
+      background: var(--accent-soft);
+      color: var(--accent-alt);
+    }
+
+    .nav-link.active span.dot {
+      display: inline-block;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.03);
+      transform: translateY(-1px);
+      color: var(--accent-alt);
+    }
+
+    /* Top intro */
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 22px 2px 14px;
+      flex-wrap: wrap;
+    }
+
+    .top-title {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .top-title h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .top-title p {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .select,
+    .search {
+      background: var(--bg-soft);
+      border-radius: 999px;
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.7);
+      font-size: 11px;
+    }
+
+    .select label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .select select {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .search input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 11px;
+      width: 150px;
+    }
+
+    .tag-label {
+      font-size: 9px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: 1px solid rgba(25,153,255,0.34);
+    }
+
+    /* Featured */
+
+    .featured-wrapper {
+      margin-top: 4px;
+      margin-bottom: 14px;
+    }
+
+    .featured-banner {
+      position: relative;
+      padding: 16px 16px 14px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.98)),
+        radial-gradient(circle at top left, rgba(25,153,255,0.18), transparent),
+        var(--bg-soft-2);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.05);
+      overflow: hidden;
+      min-height: 86px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .featured-banner.empty {
+      opacity: 0.45;
+      border-style: dashed;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .featured-kicker {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-alt);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .featured-kicker span.label {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.9);
+      border: 1px solid rgba(102,198,255,0.4);
+      font-size: 8px;
+      color: var(--accent-alt);
+    }
+
+    .featured-title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .featured-sub {
+      font-size: 11px;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .featured-meta {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Updates list */
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 2px 6px;
+    }
+
+    .list-header span {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .list-header span strong {
+      color: var(--accent-alt);
+    }
+
+    .announcements {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-xl);
+      padding: 10px 12px 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.85);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 8px;
+      align-items: flex-start;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 46px rgba(0,0,0,0.98);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity var(--transition-mid);
+      pointer-events: none;
+      filter: grayscale(0.2);
+    }
+
+    .card.has-bg::before {
+      opacity: 0.12;
+    }
+
+    .card-label {
+      font-size: 8px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-alt);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      z-index: 1;
+      align-self: flex-start;
+    }
+
+    .card-main {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .card-sub {
+      font-size: 10px;
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .card-tag {
+      font-size: 8px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.9);
+      border: 1px solid rgba(255,255,255,0.05);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .card-date {
+      font-size: 8px;
+      color: var(--muted);
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+      z-index: 1;
+      min-width: 90px;
+    }
+
+    .card-date span.ver {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(25,153,255,0.4);
+      color: var(--accent-alt);
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      font-size: 8px;
+      color: var(--muted);
+      transition: all var(--transition-fast);
+      z-index: 2;
+    }
+
+    .card:hover .card-arrow {
+      color: var(--accent-alt);
+      transform: translateY(-1px);
+    }
+
+    .card-body {
+      display: none;
+      grid-column: 1 / 4;
+      font-size: 10px;
+      color: var(--muted);
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 2px;
+      line-height: 1.5;
+      z-index: 2;
+      backdrop-filter: blur(2px);
+    }
+
+    .card.open .card-body {
+      display: block;
+    }
+
+    .card.open .card-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-alt);
+    }
+
+    /* Empty state */
+
+    .empty-state {
+      font-size: 10px;
+      color: var(--muted);
+      padding: 12px 10px;
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(255,255,255,0.18);
+      background: rgba(3,6,11,0.96);
+      display: none;
+      margin-top: 4px;
+    }
+
+    /* Admin button */
+
+    .admin-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, rgba(102,198,255,0.65), rgba(0,0,0,1));
+      color: var(--text);
+      font-size: 10px;
+      font-weight: 500;
+      border: 1px solid rgba(102,198,255,0.5);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      z-index: 80;
+      transition: all var(--transition-fast);
+    }
+
+    .admin-btn span.icon {
+      font-size: 13px;
+    }
+
+    .admin-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 60px rgba(0,0,0,1);
+      background: radial-gradient(circle at 0 0, rgba(102,198,255,0.9), rgba(0,0,0,1));
+    }
+
+    /* Modals (login + panel) */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+    }
+
+    .modal {
+      background: var(--bg-soft-2);
+      border-radius: 20px;
+      padding: 16px 16px 12px;
+      box-shadow: 0 26px 80px rgba(0,0,0,0.96);
+      border: 1px solid rgba(255,255,255,0.08);
+      max-width: 420px;
+      width: 100%;
+      font-size: 11px;
+    }
+
+    .modal h2 {
+      font-size: 15px;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .modal p {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .modal label {
+      display: block;
+      font-size: 9px;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .modal input[type="password"] {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text);
+      font-size: 11px;
+      margin-bottom: 8px;
+      outline: none;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: none;
+      font-size: 9px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #020308;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.9);
+      font-weight: 600;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid rgba(255,74,106,0.5);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.95);
+    }
+
+    /* Admin panel */
+
+    .admin-panel {
+      background: #05070c;
+      border-radius: 22px;
+      padding: 14px 14px 10px;
+      border: 1px solid rgba(102,198,255,0.24);
+      box-shadow: 0 26px 90px rgba(0,0,0,1);
+      max-width: 980px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1.3fr);
+      gap: 14px;
+      font-size: 10px;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .admin-header h2 {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-alt);
+    }
+
+    .admin-header span.sub {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .field-group {
+      display: grid;
+      grid-template-columns: 1.4fr 1.4fr 0.9fr;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .field label {
+      font-size: 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      padding: 6px 7px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text);
+      font-size: 10px;
+      outline: none;
+      resize: vertical;
+      min-height: 0;
+    }
+
+    .field textarea {
+      min-height: 70px;
+      background: #070b12;
+    }
+
+    .field-tags {
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 4px 0;
+      flex-wrap: wrap;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 8px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .toggle input {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .preview-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-xl);
+      padding: 9px 10px 7px;
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.9);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-label {
+      font-size: 8px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-alt);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .preview-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .preview-title {
+      font-size: 11px;
+      color: var(--text);
+    }
+
+    .preview-date {
+      font-size: 8px;
+      color: var(--muted);
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: flex-end;
+    }
+
+    .preview-date span.ver {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(25,153,255,0.4);
+      color: var(--accent-alt);
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .preview-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.14;
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+      filter: grayscale(0.3);
+      z-index: 0;
+    }
+
+    .preview-body {
+      grid-column: 1 / 4;
+      font-size: 8px;
+      margin-top: 4px;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .json-tip {
+      font-size: 8px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    footer {
+      margin-top: 22px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .admin-panel {
+        grid-template-columns: 1fr;
+        max-height: 92vh;
+        overflow-y: auto;
+      }
+      .preview-card {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
+<div class="page">
   <header>
-    <nav>
-      <a href="#" class="brand"><span class="logo-dot"></span><span>OXeall Studios Games</span></a>
-      <div class="tabs">
-        <div class="tab active" data-target="roblox">Roblox Games</div>
-        <div class="tab" data-target="steam">Steam Games</div>
-        <div class="tab" data-target="about">About</div>
-        <button class="search-btn" id="searchToggle">SEARCH</button>
+    <div class="brand">
+      <div class="brand-logo">OX</div>
+      <div class="brand-title">
+        <span>OXEALL STUDIOS CLNEWS</span>
+        <span>Официальные новости, патч-ноуты и dev-апдейты</span>
       </div>
+    </div>
+    <nav>
+      <div class="nav-link active"><span class="dot"></span>Обновления</div>
+      <div class="nav-link">Игры</div>
+      <div class="nav-link">Дорожная карта</div>
+      <div class="nav-link">О студии</div>
+      <div class="nav-link">GitHub / Docs</div>
     </nav>
   </header>
 
-  <div id="content">
-    <main>
-      <section id="roblox" class="page active">
-        <h2 class="section-title">Roblox Games</h2>
-        <p class="section-sub">Active projects by <b>OXeall Studios</b>.</p>
-        <div class="grid" id="gridRoblox">
-          <div class="card" data-title="Russian Town 2071" data-status="released" data-platform="Roblox">
-            <span class="badge year">2024</span>
-            <img class="thumb" src="https://tr.rbxcdn.com/180DAY-e53f8d0e48febf30c5baf27d7b5155e2/352/352/Image/Png/noFilter" alt="Russian Town 2071">
-            <div class="card__body">
-              <div class="title">Russian Town 2071</div>
-              <div class="play-container">
-                <a href="https://www.roblox.com/games/16064252635/2071-VC" target="_blank" class="btn-play" rel="noopener">PLAY</a>
-                <button class="copy-btn" data-copy="https://www.roblox.com/games/16064252635/2071-VC">
-                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+  <section class="top-bar">
+    <div class="top-title">
+      <h1>OXeall Studios — Центр обновлений</h1>
+      <p>Все официальные обновления проектов OXeall: патчи, хотфиксы, мейджоры, dev-логи и анонсы. Интерфейс в духе Steam для твоих игр.</p>
+    </div>
+    <div class="controls">
+      <div class="select">
+        <label for="gameFilter">Игра</label>
+        <select id="gameFilter">
+          <option value="all">Все проекты</option>
+        </select>
+      </div>
+      <div class="search">
+        <input id="searchInput" type="text" placeholder="Поиск по обновлениям..." />
+      </div>
+      <div class="tag-label">Developer verified • OXeall</div>
+    </div>
+  </section>
 
-          <div class="card" data-title="City DayX" data-status="released" data-platform="Roblox">
-            <span class="badge year">2023</span>
-            <img class="thumb" src="https://tr.rbxcdn.com/180DAY-65050422dd55f23af40087e5305b689b/352/352/Image/Png/noFilter" alt="City DayX">
-            <div class="card__body">
-              <div class="title">City DayX</div>
-              <div class="play-container">
-                <a href="https://www.roblox.com/games/12963395883/City-Day-X" target="_blank" class="btn-play" rel="noopener">PLAY</a>
-                <button class="copy-btn" data-copy="https://www.roblox.com/games/12963395883/City-Day-X">
-                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+  <section class="featured-wrapper">
+    <div class="featured-banner empty" id="featuredBanner">
+      <div class="featured-kicker">
+        Нет закреплённого крупного обновления
+        <span class="label">Создай через Admin Update Panel</span>
+      </div>
+      <div class="featured-sub">
+        Как только ты отметишь обновление как <strong>Featured</strong> в панели разработчика, оно появится здесь как главный баннер (как в Steam).
+      </div>
+    </div>
+  </section>
 
-          <div class="card" data-title="City DayX 2" data-status="unreleased" data-platform="Roblox">
-            <span class="badge soon">SOON Q1 2026</span>
-            <img class="thumb" src="https://t2.rbxcdn.com/180DAY-cf7ec8785144e39d59caace447f63ba7" alt="City DayX 2">
-            <div class="card__body">
-              <div class="title">City DayX 2</div>
-              <div class="play-container">
-                <button class="btn-play" data-learn="City DayX 2">LEARN MORE</button>
-                <button class="copy-btn" data-copy="https://www.roblox.com/games/91741785184440/City-Day-X">
-                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+  <div class="list-header">
+    <span><strong>Лента обновлений</strong></span>
+    <span>Нажми по карточке обновления, чтобы увидеть полный changelog.</span>
+  </div>
 
-          <div class="card" data-title="Racing Friends" data-status="released" data-platform="Roblox">
-            <span class="badge year">2024</span>
-            <img class="thumb" src="https://tr.rbxcdn.com/180DAY-95d197836434662466c18c6bf36f8b28/150/150/Image/Webp/noFilter" alt="Racing Friends">
-            <div class="card__body">
-              <div class="title">Racing Friends</div>
-              <div class="play-container">
-                <a href="https://www.roblox.com/games/18311121604/Racing-Friends" target="_blank" class="btn-play" rel="noopener">PLAY</a>
-                <button class="copy-btn" data-copy="https://www.roblox.com/games/18311121604/Racing-Friends">
-                  <svg viewBox="0 0 24 24"><path d="M3.9,12.5l2.8,2.8a5,5,0,0,0,7.1,0l2.8-2.8a5,5,0,0,0,0-7.1l-1.2-1.2a5,5,0,0,0-7.1,0L6.5,6.1a1,1,0,0,0,1.4,1.4l1.8-1.8a3,3,0,0,1,4.3,0l1.2,1.2a3,3,0,0,1,0,4.3l-2.8,2.8a3,3,0,0,1-4.3,0L5.3,11.1A1,1,0,0,0,3.9,12.5Z"/></svg>
-                </button>
-              </div>
-            </div>
+  <div id="emptyState" class="empty-state">
+    Пока нет опубликованных обновлений. Открой <strong>Admin Update Panel</strong> (кнопка справа внизу),
+    создай первое обновление и экспортируй <code>updates.json</code>, чтобы все видели его на сайте.
+  </div>
+
+  <section class="announcements" id="announcementList"></section>
+
+  <footer>
+    <div>© <span id="year"></span> OXeall Studios. CLNEWS Hub.</div>
+    <div>GitHub Pages • Для глобальных обновлений используй <code>updates.json</code> в репозитории.</div>
+  </footer>
+</div>
+
+<!-- Admin floating button -->
+<button class="admin-btn" id="adminBtn">
+  <span class="icon">⚙️</span>
+  <span>Admin Update Panel</span>
+</button>
+
+<!-- Login modal -->
+<div class="modal-backdrop" id="loginModal">
+  <div class="modal">
+    <h2>Вход в панель разработчика</h2>
+    <p>Эта зона только для OXeall Studios. Введи пароль, чтобы управлять обновлениями.</p>
+    <label for="adminPassword">Пароль</label>
+    <input type="password" id="adminPassword" placeholder="Введите пароль" />
+    <div id="loginError" style="display:none;color:#ff4a6a;font-size:8px;margin-top:-4px;margin-bottom:4px;">
+      Неверный пароль.
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="loginCancel">Отмена</button>
+      <button class="btn btn-primary" id="loginSubmit">Войти</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin panel modal -->
+<div class="modal-backdrop" id="adminPanelModal">
+  <div class="admin-panel">
+    <div>
+      <div class="admin-header">
+        <h2>Admin Update Panel</h2>
+        <span class="sub">Создавай и редактируй карточки обновлений в стиле Steam.</span>
+      </div>
+
+      <div class="field-group">
+        <div class="field">
+          <label for="fieldGame">Игра / Проект</label>
+          <input id="fieldGame" type="text" placeholder="Например: CityPort, Neon Arena..." />
+        </div>
+        <div class="field">
+          <label for="fieldType">Тип обновления</label>
+          <select id="fieldType">
+            <option value="Major">Major Update</option>
+            <option value="Minor">Minor Update</option>
+            <option value="Patch">Patch</option>
+            <option value="Hotfix">Hotfix</option>
+            <option value="DevLog">DevLog</option>
+            <option value="Announcement">Announcement</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fieldVersion">Версия</label>
+          <input id="fieldVersion" type="text" placeholder="1.0.0, 1.3.6f1..." />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field">
+          <label for="fieldTitle">Заголовок</label>
+          <input id="fieldTitle" type="text" placeholder="Краткий и понятный тайтл обновления" />
+        </div>
+        <div class="field">
+          <label for="fieldDate">Дата</label>
+          <input id="fieldDate" type="date" />
+        </div>
+        <div class="field">
+          <label for="fieldBg">Фон (URL)</label>
+          <input id="fieldBg" type="text" placeholder="Опционально: ссылка на фон" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="fieldShort">Краткое описание</label>
+        <input id="fieldShort" type="text" placeholder="1–2 строки, как в Steam-анонсе." />
+      </div>
+
+      <div class="field">
+        <label for="fieldTags">Теги</label>
+        <input id="fieldTags" type="text" placeholder="Через запятую: CityPort, Patch, Balance..." />
+        <div class="field-tags">Используются для поиска, фильтров и визуальных бейджей.</div>
+      </div>
+
+      <div class="field">
+        <label for="fieldChangelog">Полный changelog</label>
+        <textarea id="fieldChangelog" placeholder="- Пункт 1
+- Пункт 2
+- Пункт 3"></textarea>
+      </div>
+
+      <div class="toggle-row">
+        <label class="toggle">
+          <input type="checkbox" id="fieldFeatured" />
+          Сделать это обновление главным баннером (Featured)
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="fieldPin" />
+          Поднять в топ списка (закрепить)
+        </label>
+      </div>
+
+      <div class="admin-actions">
+        <button class="btn btn-primary" id="btnAddUpdate">Добавить / Обновить в ленте</button>
+        <button class="btn btn-outline" id="btnClearForm">Очистить форму</button>
+        <button class="btn btn-danger" id="btnClearLocal">Очистить локальные данные</button>
+      </div>
+
+      <div class="json-tip">
+        <strong>Как сделать обновления видимыми для всех:</strong><br />
+        1) Создай/отредактируй обновления здесь.<br />
+        2) Нажми «Экспортировать updates.json».<br />
+        3) Закинь файл <code>updates.json</code> в корень репозитория.<br />
+        4) GitHub Pages обновится — и все увидят новые обновления.
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div>
+      <div class="admin-header">
+        <h2>Live Preview</h2>
+        <span class="sub">Так будет выглядеть карточка обновления на сайте.</span>
+      </div>
+
+      <div class="preview-card" id="previewCard">
+        <div class="preview-label" id="previewType">Major Update</div>
+        <div class="preview-main">
+          <div class="preview-title" id="previewTitle">Заголовок обновления</div>
+          <div id="previewShort">Краткое описание обновления появится здесь.</div>
+          <div id="previewTags" style="margin-top:3px;font-size:8px;color:var(--muted);">
+            #Project #Tag
           </div>
         </div>
-      </section>
+        <div class="preview-date">
+          <span id="previewDate">Дата</span>
+          <span class="ver" id="previewVersion">vX.X.X</span>
+        </div>
+        <div class="preview-bg" id="previewBg"></div>
+        <div class="preview-body" id="previewBody">
+          Список изменений (changelog) показывается здесь. Каждый пункт с новой строки будет перенесён в список.
+        </div>
+      </div>
 
-      <section id="steam" class="page" style="display:none">
-        <h2 class="section-title">Steam Games</h2>
-        <p class="section-sub">Coming soon…</p>
-        <div class="grid" id="gridSteam"><!-- пусто, появится позже --></div>
-      </section>
-
-      <section id="about" class="page" style="display:none">
-        <h2 class="section-title">About</h2>
-        <p class="section-sub">OXeall — technology initiative started in 2023, focused on speed and engineering. OXeall Studios is the game division.</p>
-      </section>
-    </main>
-
-    <div class="footer">
-      Games by <strong>OXeall Studios</strong>. Unauthorized copying/publishing may lead to access limitations. <br />
-      Version <strong>1.1.0.0.5</strong> | Build 25H4.
+      <div class="admin-actions" style="margin-top:8px;">
+        <button class="btn btn-primary" id="btnExportJson">Экспортировать updates.json</button>
+        <button class="btn btn-outline" id="btnClosePanel">Закрыть панель</button>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Search UI -->
-  <div class="overlay" id="overlay"></div>
-  <div class="search-slide" id="searchSlide">
-    <button class="close-btn" id="closeSearch">×</button>
-    <input type="text" id="searchInput" placeholder="Search games or status (Released / Unreleased)..." />
-  </div>
+<script>
+  const ADMIN_PASSWORD = "OXS11993384756281";
 
-  <!-- Modal Learn More -->
-  <div class="modal" id="modal">
-    <div class="back" id="modalBack"></div>
-    <div class="box">
-      <button class="closeX" id="modalClose">×</button>
-      <h3>City DayX 2 — SOON</h3>
-      <p style="color:#9fb8c6;margin:8px 0 6px">Age 9+.</p>
-      <p style="margin-bottom:10px">Experimental sequel in the DayX line. New tech, visuals, and interactions under active testing.</p>
-      <p><b>Expected launch:</b> January 2026. Follow updates on the site and Roblox.</p>
-    </div>
-  </div>
+  const yearEl = document.getElementById("year");
+  yearEl.textContent = new Date().getFullYear();
 
-  <div class="toast" id="toast">Link copied</div>
+  const adminBtn = document.getElementById("adminBtn");
+  const loginModal = document.getElementById("loginModal");
+  const adminPanelModal = document.getElementById("adminPanelModal");
+  const loginCancel = document.getElementById("loginCancel");
+  const loginSubmit = document.getElementById("loginSubmit");
+  const adminPasswordInput = document.getElementById("adminPassword");
+  const loginError = document.getElementById("loginError");
 
-  <script>
-    // Tabs with fade
-    const content = document.getElementById('content');
-    const tabs = document.querySelectorAll('.tab');
-    const pages = document.querySelectorAll('.page');
+  let isAdmin = false;
+  let updates = [];
 
-    function showPage(targetId){
-      content.classList.add('fading');
-      setTimeout(()=>{
-        pages.forEach(p=>{
-          const show = p.id === targetId;
-          p.style.display = show ? 'block' : 'none';
-        });
-        tabs.forEach(t=>t.classList.toggle('active', t.dataset.target===targetId));
-        content.classList.remove('fading');
-      },120);
+  /* ---------- Utils ---------- */
+
+  function formatDate(dateStr) {
+    if (!dateStr) return "";
+    const d = new Date(dateStr);
+    if (isNaN(d)) return dateStr;
+    const months = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+    const day = String(d.getDate()).padStart(2,"0");
+    const month = months[d.getMonth()];
+    const year = d.getFullYear();
+    return `${day} ${month} ${year}`;
+  }
+
+  function typeLabel(type) {
+    switch (type) {
+      case "Major": return "Major Update";
+      case "Minor": return "Minor Update";
+      case "Patch": return "Patch";
+      case "Hotfix": return "Hotfix";
+      case "DevLog": return "Dev Log";
+      case "Announcement": return "Announcement";
+      default: return type || "Update";
+    }
+  }
+
+  function genId(update) {
+    const base = (update.game || "update")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    const ts = Date.now().toString(36);
+    return `${base}-${ts}`;
+  }
+
+  function changelogToHtml(text) {
+    if (!text) return "";
+    const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+    if (!lines.length) return "";
+    if (lines.every(l => l.startsWith("-") || l.startsWith("•"))) {
+      return "<ul>" + lines.map(l =>
+        "<li>" + l.replace(/^(-|\•)\s*/, "") + "</li>"
+      ).join("") + "</ul>";
+    }
+    return text.replace(/\n/g, "<br>");
+  }
+
+  function createCard(update) {
+    const card = document.createElement("article");
+    card.className = "card";
+    if (update.background) card.classList.add("has-bg");
+    card.dataset.game = update.game || "";
+    card.dataset.tags = (update.tags || []).join(" ").toLowerCase();
+    card.dataset.title = (update.title || "").toLowerCase();
+
+    const labelDiv = document.createElement("div");
+    labelDiv.className = "card-label";
+    labelDiv.textContent = typeLabel(update.type);
+
+    const mainDiv = document.createElement("div");
+    mainDiv.className = "card-main";
+
+    const titleDiv = document.createElement("div");
+    titleDiv.className = "card-title";
+    titleDiv.textContent = update.title || "(Без названия)";
+
+    const subDiv = document.createElement("div");
+    subDiv.className = "card-sub";
+    subDiv.textContent = update.short || "";
+
+    const tagsDiv = document.createElement("div");
+    tagsDiv.className = "card-tags";
+    (update.tags || []).forEach(tag => {
+      const t = document.createElement("span");
+      t.className = "card-tag";
+      t.textContent = tag;
+      tagsDiv.appendChild(t);
+    });
+
+    mainDiv.appendChild(titleDiv);
+    if (update.short) mainDiv.appendChild(subDiv);
+    if ((update.tags || []).length) mainDiv.appendChild(tagsDiv);
+
+    const dateDiv = document.createElement("div");
+    dateDiv.className = "card-date";
+    const dSpan = document.createElement("span");
+    dSpan.textContent = formatDate(update.date);
+    const vSpan = document.createElement("span");
+    vSpan.className = "ver";
+    vSpan.textContent = update.version ? `v${update.version}` : " ";
+    dateDiv.appendChild(dSpan);
+    dateDiv.appendChild(vSpan);
+
+    const arrow = document.createElement("div");
+    arrow.className = "card-arrow";
+    arrow.textContent = "▼";
+
+    const bodyDiv = document.createElement("div");
+    bodyDiv.className = "card-body";
+    bodyDiv.innerHTML = changelogToHtml(update.changelog || "");
+
+    if (update.background) {
+      card.style.setProperty("--bg-card", `url('${update.background}')`);
+      card.querySelector?.(":before");
+      card.style.setProperty("backgroundImage", "none");
+      card.style.setProperty("position", "relative");
+      card.style.setProperty("overflow", "hidden");
+      card.style.setProperty("backdropFilter", "blur(1px)");
+      card.style.setProperty("backgroundColor", "rgba(5,7,12,0.98)");
+      card.style.setProperty("--bg-opacity", "0.12");
+      card.style.background = "rgba(5,7,12,0.98)";
+      card.style.setProperty("background-blend-mode", "overlay");
+      card.style.setProperty("background-size", "cover");
+      card.style.setProperty("background-position", "center");
+      card.style.setProperty("background-image", `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.98)), url('${update.background}')`);
     }
 
-    tabs.forEach(t=>t.addEventListener('click', ()=>showPage(t.dataset.target)));
+    card.appendChild(labelDiv);
+    card.appendChild(mainDiv);
+    card.appendChild(dateDiv);
+    card.appendChild(arrow);
+    if (update.changelog) card.appendChild(bodyDiv);
 
-    // Search slide
-    const searchToggle=document.getElementById('searchToggle');
-    const searchSlide=document.getElementById('searchSlide');
-    const closeSearch=document.getElementById('closeSearch');
-    const overlay=document.getElementById('overlay');
-    const searchInput=document.getElementById('searchInput');
+    card.addEventListener("click", (e) => {
+      if (e.target.tagName === "A" || e.target.closest("a")) return;
+      card.classList.toggle("open");
+    });
 
-    searchToggle.addEventListener('click',()=>{searchSlide.classList.add('active');overlay.classList.add('active');searchInput.focus();});
-    function closeSearchUI(){searchSlide.classList.remove('active');overlay.classList.remove('active');}
-    closeSearch.addEventListener('click',closeSearchUI);
-    overlay.addEventListener('click',closeSearchUI);
+    return card;
+  }
 
-    // Filter across ALL cards (Roblox + Steam)
-    const allCards = () => document.querySelectorAll('.card');
-    searchInput.addEventListener('input', ()=>{
-      const q = searchInput.value.toLowerCase().trim();
-      // During search, make both lists visible for overview
-      if(q){
-        document.getElementById('roblox').style.display='block';
-        document.getElementById('steam').style.display='block';
-        document.getElementById('about').style.display='none';
-      }
-      allCards().forEach(card=>{
-        const title=(card.dataset.title||'').toLowerCase();
-        const status=(card.dataset.status||'').toLowerCase();
-        card.style.display = (!q || title.includes(q) || status.includes(q)) ? 'block' : 'none';
+  function renderFeatured() {
+    const banner = document.getElementById("featuredBanner");
+    const featured = updates.find(u => u.featured);
+    if (!featured) {
+      banner.classList.add("empty");
+      banner.style.backgroundImage = "none";
+      banner.innerHTML = `
+        <div class="featured-kicker">
+          Нет закреплённого крупного обновления
+          <span class="label">Отметь любое как Featured в панели</span>
+        </div>
+        <div class="featured-sub">
+          Панель разработчика позволяет выбрать главное обновление, которое будет показываться здесь как баннер — как в Steam.
+        </div>`;
+      return;
+    }
+
+    banner.classList.remove("empty");
+    banner.style.backgroundImage = featured.background
+      ? `linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.98)), url('${featured.background}')`
+      : "linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.98))";
+
+    banner.innerHTML = `
+      <div class="featured-kicker">
+        ${typeLabel(featured.type)} • ${featured.game || "OXeall Project"}
+        <span class="label">Featured</span>
+        <span>${formatDate(featured.date)}</span>
+      </div>
+      <div class="featured-title">${featured.title || ""}</div>
+      <div class="featured-sub">${featured.short || ""}</div>
+      <div class="featured-meta">
+        Версия: ${featured.version || "—"}
+        ${featured.tags && featured.tags.length ? " • " + featured.tags.join(", ") : ""}
+      </div>
+    `;
+  }
+
+  function renderUpdates() {
+    const list = document.getElementById("announcementList");
+    const empty = document.getElementById("emptyState");
+    list.innerHTML = "";
+
+    if (!updates.length) {
+      empty.style.display = "block";
+      renderFeatured();
+      return;
+    }
+    empty.style.display = "none";
+
+    updates.sort((a, b) => {
+      if (a.pin && !b.pin) return -1;
+      if (!a.pin && b.pin) return 1;
+      const da = new Date(a.date || 0).getTime();
+      const db = new Date(b.date || 0).getTime();
+      return db - da;
+    });
+
+    updates.forEach(update => {
+      const card = createCard(update);
+      list.appendChild(card);
+    });
+
+    renderFeatured();
+    attachFilters();
+  }
+
+  function attachFilters() {
+    const gameFilter = document.getElementById("gameFilter");
+    const searchInput = document.getElementById("searchInput");
+    const cards = Array.from(document.querySelectorAll(".card"));
+
+    const games = Array.from(new Set(
+      updates.map(u => u.game).filter(Boolean)
+    ));
+    gameFilter.innerHTML = '<option value="all">Все проекты</option>' +
+      games.map(g => `<option value="${g}">${g}</option>`).join("");
+
+    function apply() {
+      const game = gameFilter.value;
+      const q = (searchInput.value || "").toLowerCase().trim();
+
+      cards.forEach(card => {
+        const cardGame = card.dataset.game || "";
+        const text = (card.dataset.title + " " + card.dataset.tags + " " + card.innerText).toLowerCase();
+        const matchGame = (game === "all") || (cardGame === game);
+        const matchSearch = !q || text.includes(q);
+        card.style.display = (matchGame && matchSearch) ? "" : "none";
       });
-    });
+    }
 
-    // Copy link (delegation)
-    const toast=document.getElementById('toast');
-    document.addEventListener('click',e=>{
-      const copy = e.target.closest('[data-copy]');
-      if(copy){
-        const url = copy.getAttribute('data-copy');
-        navigator.clipboard.writeText(url).then(()=>{
-          toast.textContent='Link copied';
-          toast.classList.add('show');
-          setTimeout(()=>toast.classList.remove('show'),2200);
-        });
+    gameFilter.onchange = apply;
+    searchInput.oninput = apply;
+    apply();
+  }
+
+  /* ---------- Load from updates.json + localStorage ---------- */
+
+  function loadFromLocal() {
+    try {
+      const raw = localStorage.getItem("oxeall_clnews_updates");
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (Array.isArray(data)) {
+        updates = updates.concat(data);
       }
-      const learn = e.target.closest('[data-learn]');
-      if(learn){ openModal(); }
-    });
+    } catch (e) {}
+  }
 
-    // Modal
-    const modal=document.getElementById('modal');
-    const modalBack=document.getElementById('modalBack');
-    const modalClose=document.getElementById('modalClose');
-    function openModal(){ modal.classList.add('active'); }
-    function closeModal(){ modal.classList.remove('active'); }
-    modalBack.addEventListener('click',closeModal);
-    modalClose.addEventListener('click',closeModal);
-  </script>
+  function saveToLocal() {
+    try {
+      localStorage.setItem("oxeall_clnews_updates", JSON.stringify(updates));
+    } catch (e) {}
+  }
+
+  function loadFromJson() {
+    fetch("updates.json", {cache: "no-store"})
+      .then(res => {
+        if (!res.ok) throw new Error("no updates.json");
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          updates = data;
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        loadFromLocal();
+        renderUpdates();
+      });
+  }
+
+  loadFromJson();
+
+  /* ---------- Admin: login & open panel ---------- */
+
+  adminBtn.addEventListener("click", () => {
+    if (isAdmin) {
+      adminPanelModal.style.display = "flex";
+      return;
+    }
+    loginError.style.display = "none";
+    adminPasswordInput.value = "";
+    loginModal.style.display = "flex";
+    adminPasswordInput.focus();
+  });
+
+  loginCancel.addEventListener("click", () => {
+    loginModal.style.display = "none";
+  });
+
+  loginSubmit.addEventListener("click", () => {
+    const val = adminPasswordInput.value.trim();
+    if (val === ADMIN_PASSWORD) {
+      isAdmin = true;
+      loginModal.style.display = "none";
+      adminPanelModal.style.display = "flex";
+      loginError.style.display = "none";
+    } else {
+      loginError.style.display = "block";
+    }
+  });
+
+  adminPasswordInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") loginSubmit.click();
+  });
+
+  document.getElementById("btnClosePanel").addEventListener("click", () => {
+    adminPanelModal.style.display = "none";
+  });
+
+  // Закрытие по клику вне
+  [loginModal, adminPanelModal].forEach(modal => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
+
+  /* ---------- Admin: form + preview ---------- */
+
+  const fieldGame = document.getElementById("fieldGame");
+  const fieldType = document.getElementById("fieldType");
+  const fieldVersion = document.getElementById("fieldVersion");
+  const fieldTitle = document.getElementById("fieldTitle");
+  const fieldDate = document.getElementById("fieldDate");
+  const fieldBg = document.getElementById("fieldBg");
+  const fieldShort = document.getElementById("fieldShort");
+  const fieldTags = document.getElementById("fieldTags");
+  const fieldChangelog = document.getElementById("fieldChangelog");
+  const fieldFeatured = document.getElementById("fieldFeatured");
+  const fieldPin = document.getElementById("fieldPin");
+
+  const previewType = document.getElementById("previewType");
+  const previewTitle = document.getElementById("previewTitle");
+  const previewShort = document.getElementById("previewShort");
+  const previewTags = document.getElementById("previewTags");
+  const previewDate = document.getElementById("previewDate");
+  const previewVersion = document.getElementById("previewVersion");
+  const previewBg = document.getElementById("previewBg");
+  const previewBody = document.getElementById("previewBody");
+
+  function updatePreview() {
+    previewType.textContent = typeLabel(fieldType.value);
+    previewTitle.textContent = fieldTitle.value || "Заголовок обновления";
+    previewShort.textContent = fieldShort.value || "Краткое описание обновления появится здесь.";
+    previewDate.textContent = fieldDate.value ? formatDate(fieldDate.value) : "Дата";
+    previewVersion.textContent = fieldVersion.value ? `v${fieldVersion.value}` : "vX.X.X";
+
+    const tags = (fieldTags.value || "")
+      .split(",")
+      .map(t => t.trim())
+      .filter(Boolean);
+    previewTags.textContent = tags.length ? "#" + tags.join(" #") : "#Project #Tag";
+
+    const bg = fieldBg.value.trim();
+    if (bg) {
+      previewBg.style.backgroundImage = `url('${bg}')`;
+      previewBg.style.display = "block";
+    } else {
+      previewBg.style.backgroundImage = "none";
+      previewBg.style.display = "none";
+    }
+
+    const cl = fieldChangelog.value.trim();
+    previewBody.innerHTML = cl ? changelogToHtml(cl) :
+      "Список изменений (changelog) показывается здесь. Каждый пункт с новой строки будет перенесён в список.";
+  }
+
+  [fieldGame, fieldType, fieldVersion, fieldTitle, fieldDate, fieldBg,
+   fieldShort, fieldTags, fieldChangelog, fieldFeatured, fieldPin]
+    .forEach(el => el.addEventListener("input", updatePreview));
+
+  updatePreview();
+
+  document.getElementById("btnClearForm").addEventListener("click", () => {
+    fieldGame.value = "";
+    fieldType.value = "Major";
+    fieldVersion.value = "";
+    fieldTitle.value = "";
+    fieldDate.value = "";
+    fieldBg.value = "";
+    fieldShort.value = "";
+    fieldTags.value = "";
+    fieldChangelog.value = "";
+    fieldFeatured.checked = false;
+    fieldPin.checked = false;
+    updatePreview();
+  });
+
+  document.getElementById("btnClearLocal").addEventListener("click", () => {
+    if (!confirm("Очистить локальные данные панели? Это не тронет updates.json в репо.")) return;
+    localStorage.removeItem("oxeall_clnews_updates");
+    loadFromJson();
+  });
+
+  document.getElementById("btnAddUpdate").addEventListener("click", () => {
+    const update = {
+      id: genId({game: fieldGame.value || "update"}),
+      game: fieldGame.value.trim() || "OXeall Project",
+      type: fieldType.value,
+      version: fieldVersion.value.trim(),
+      title: fieldTitle.value.trim() || "Без названия",
+      date: fieldDate.value || new Date().toISOString().slice(0,10),
+      background: fieldBg.value.trim() || "",
+      short: fieldShort.value.trim(),
+      tags: (fieldTags.value || "").split(",").map(t => t.trim()).filter(Boolean),
+      changelog: fieldChangelog.value.trim(),
+      featured: fieldFeatured.checked,
+      pin: fieldPin.checked
+    };
+
+    if (update.featured) {
+      updates.forEach(u => u.featured = false);
+    }
+
+    updates.unshift(update);
+    saveToLocal();
+    renderUpdates();
+    alert("Обновление добавлено в текущую ленту. Для глобального эффекта — экспортируй updates.json и залей в репозиторий.");
+  });
+
+  document.getElementById("btnExportJson").addEventListener("click", () => {
+    const dataStr = JSON.stringify(updates, null, 2);
+    const blob = new Blob([dataStr], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "updates.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+</script>
 </body>
 </html>
